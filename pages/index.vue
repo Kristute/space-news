@@ -1,5 +1,5 @@
 <template>
-  <Tutorial />
+  <h1>Welcome to space news</h1>
 </template>
 
 <script lang="ts">
