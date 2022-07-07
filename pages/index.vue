@@ -6,11 +6,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import LoginForm from './../components/login/LoginForm.vue'
+import { defineComponent } from 'vue';
+import LoginForm from '../components/login/LoginForm.vue';
 
 
-export default Vue.extend({
+export default defineComponent ({
   name: 'App',
   components: {
     LoginForm,

@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <form novalidate @submit.prevent >
+    <form novalidate @submit.prevent="onSubmit" >
       <input v-model="user.username" placeholder="Username">
       <input v-model="user.password" placeholder="Password" type="password">
       <input :disabled="!isDisabled" class="button" type="submit" value="Login" autocomplete="off">
@@ -8,18 +8,21 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
-import { reactive, computed } from '@nuxtjs/composition-api';
-import useRouter from 'vue-router'
+import { defineComponent, reactive, computed } from 'vue';
+import useRouter from 'vue-router';
+import NotFoundComponent from '../../components/NotFoundComponent.vue';
 
-declare module 'vue/types/vue' {
-    interface Vue {
-      user: any;
-      isDisabled: () => boolean;
+    declare module 'vue/types/vue' {
+        interface Vue {
+        user: {
+            username: string;
+            password: string;
+        };
+        isDisabled: () => boolean;
+        }
     }
-  }
 
-    export default Vue.extend({
+    export default defineComponent({
         name: "LoginPage",
         setup() {
             const user = reactive({
@@ -27,30 +30,38 @@ declare module 'vue/types/vue' {
                 password: '',
             })
 
-        const router = new useRouter({
-        routes: [
-            {
-                path: "/articles",
-                name: "articles",
-                component: () => import('../../pages/articles/articlePage.vue')
-            },
-        ]
-        })
-
+            // eslint-disable-next-line new-cap
+            const router = new useRouter({
+            mode: 'history',
+            routes: [
+                {
+                    path: "/articles",
+                    name: "articles",
+                    component: () => import('../../pages/articles/index.vue')
+                },
+                { path: '*', component: NotFoundComponent }
+            ]
+            })
 
             const isDisabled = computed(() => {
                 let disabled = false;
                 if(user.username !== "" && user.password !== "") {
-                    // this.$router.push({ path: "articles" });
-                    router.push({ name: 'articles' })
                     disabled = true;
                 } 
                 return disabled;
-             });
+            });
+
+            const onSubmit = () => {
+                const path = 'articles';
+                // window.location.href = path;
+                router.push({ name: path }); // not works because of #/articles // now does not render new view
+                // location.reload();
+            };
 
             return {
                 user,
                 isDisabled,
+                onSubmit,
             }
         }
     });
