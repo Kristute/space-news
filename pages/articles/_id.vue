@@ -1,10 +1,22 @@
 <template>
       <div>
         <h1>Article #{{ id }}</h1>
+        <div>{{ article }}</div>
+        <!-- <a :href="`${article.url }`" target="_blank">Read full article </a> -->
       </div>
 </template>
 <script>
     export default {
+      data() {
+        return {
+          article: []
+        }
+      },
+      async fetch() {
+        this.article = await fetch('https://api.spaceflightnewsapi.net/v3/articles/' + this.id).then(res =>
+          res.json()
+        )
+      },
       head() {
         return {
           title: 'Article #' + this.id,
@@ -23,4 +35,4 @@
         }
       }
     }
-    </script>
+</script>
