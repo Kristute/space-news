@@ -1,17 +1,16 @@
 <template>
       <div>
-        <h1>Articles Page</h1>
-              <div v-if="pending">
-                Loading ...
-              </div>
-              <div v-else>
-                  <ul class="articles-list"> 
-                    <li v-for="article in articles" :key="article.id" class="article-item">
-                      {{ article.title }}
-                      <SpaceArticle />
-                    </li>
-                  </ul>
-              </div>
+        <v-layout justify-center>
+          <v-card-title primary justify-center class="headline justify-center">
+            Articles Page
+          </v-card-title>
+        </v-layout>
+          <div v-if="pending">
+            Loading ...
+          </div>
+          <div v-else>
+            <SpaceArticle :articles="articles" />
+          </div>
           <!-- <h4 v-if="articles.length === 0">Empty list.</h4> -->
       </div>
 </template>
@@ -34,5 +33,8 @@ export default defineComponent ({
 })
 </script>
 <style lang="scss" scoped>
-  
+  .headline {
+    text-align: center;
+    width: 100%;
+  }
 </style>
