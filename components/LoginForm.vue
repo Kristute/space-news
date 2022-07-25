@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, reactive, computed } from 'vue';
 import useRouter from 'vue-router';
-import NotFoundComponent from '../../components/NotFoundComponent.vue';
+import NotFoundComponent from './NotFoundComponent.vue';
 
     declare module 'vue/types/vue' {
         interface Vue {
@@ -37,7 +37,7 @@ import NotFoundComponent from '../../components/NotFoundComponent.vue';
                 {
                     path: "/articles",
                     name: "articles",
-                    component: () => import('../../pages/articles/index.vue')
+                    component: () => import('../pages/articles/index.vue')
                 },
                 { path: '*', component: NotFoundComponent }
             ]
@@ -53,9 +53,8 @@ import NotFoundComponent from '../../components/NotFoundComponent.vue';
 
             const onSubmit = () => {
                 const path = 'articles';
-                // window.location.href = path;
-                router.push({ name: path }); // not works because of #/articles // now does not render new view
-                // location.reload();
+                window.location.href = path;
+                router.push({ name: path });
             };
 
             return {
@@ -116,6 +115,10 @@ import NotFoundComponent from '../../components/NotFoundComponent.vue';
         padding: 0 6px;
         padding-left: 12px;
         margin: 12px 0;
+    }
+
+    input {
+        background: white;
     }
 
     input:focus {

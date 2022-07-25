@@ -1,30 +1,23 @@
 <template>
-  <div>
-    <h1>Welcome to space news</h1>
-    <LoginForm />
-  </div>
+  <Wrapper>
+    <h1 class="text-center my-5">Welcome to space news</h1>
+    <div class="text-center">
+      <a href="/login">
+        <v-btn class="info">Login</v-btn>
+      </a>
+    </div>
+  </Wrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import LoginForm from '../components/login/LoginForm.vue';
+import Wrapper from '../components/Wrapper.vue';
 
 
 export default defineComponent ({
   name: 'App',
   components: {
-    LoginForm,
+    Wrapper,
   }
 })
 </script>
-
-<style lang="scss">
-html, body {
-  margin: 0;
-  height: 100%;
-  background: #F9F9F9;
-}
-.container {
-  padding-top: 20px;
-}
-</style>

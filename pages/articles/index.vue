@@ -1,27 +1,25 @@
 <template>
-      <div>
-        <v-layout justify-center>
-          <v-card-title primary justify-center class="headline justify-center">
-            Articles Page
-          </v-card-title>
-        </v-layout>
-          <div v-if="pending">
-            Loading ...
-          </div>
-          <div v-else>
-            <SpaceArticle :articles="articles" />
-          </div>
-          <!-- <h4 v-if="articles.length === 0">Empty list.</h4> -->
+  <Wrapper>
+      <div class="headline">
+        <h1>Articles</h1>
       </div>
+      <div v-if="pending">
+        Loading ...
+      </div>
+      <div v-else>
+        <SpaceArticle :articles="articles" />
+      </div>
+  </Wrapper>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
 import SpaceArticle from '../../components/SpaceArticle.vue';
+import Wrapper from '@/components/Wrapper.vue';
 
 export default defineComponent ({
-
   components: {
     SpaceArticle,
+    Wrapper,
   },
   setup() {
     const { pending, data: articles } = useLazyFetch('https://api.spaceflightnewsapi.net/v3/articles');
@@ -35,6 +33,6 @@ export default defineComponent ({
 <style lang="scss" scoped>
   .headline {
     text-align: center;
-    width: 100%;
+    margin: 50px;
   }
 </style>
