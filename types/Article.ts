@@ -3,4 +3,7 @@
     id: number;
     title: string;
     imageUrl: string;
+    publishedAt: Date;
+    updatedAt: Date;
   };
+  

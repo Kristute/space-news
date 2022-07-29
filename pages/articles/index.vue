@@ -1,28 +1,25 @@
 <template>
-      <div>
-        <h1>Articles Page</h1>
-              <div v-if="pending">
-                Loading ...
-              </div>
-              <div v-else>
-                  <ul class="articles-list"> 
-                    <li v-for="article in articles" :key="article.id" class="article-item">
-                      {{ article.title }}
-                      <SpaceArticle />
-                    </li>
-                  </ul>
-              </div>
-          <!-- <h4 v-if="articles.length === 0">Empty list.</h4> -->
+  <Wrapper>
+      <div class="headline">
+        <h1>Articles</h1>
       </div>
+      <div v-if="pending">
+        Loading ...
+      </div>
+      <div v-else>
+        <SpaceArticle :articles="articles" />
+      </div>
+  </Wrapper>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
 import SpaceArticle from '../../components/SpaceArticle.vue';
+import Wrapper from '@/components/Wrapper.vue';
 
 export default defineComponent ({
-
   components: {
     SpaceArticle,
+    Wrapper,
   },
   setup() {
     const { pending, data: articles } = useLazyFetch('https://api.spaceflightnewsapi.net/v3/articles');
@@ -34,5 +31,8 @@ export default defineComponent ({
 })
 </script>
 <style lang="scss" scoped>
-  
+  .headline {
+    text-align: center;
+    margin: 50px;
+  }
 </style>
