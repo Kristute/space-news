@@ -11,7 +11,7 @@ import LoginForm from '@/components/LoginForm.vue';
 import Wrapper from '@/components/Wrapper.vue';
 
 export default defineComponent ({
-  name: 'Login',
+  name: 'LoginPage',
   components: {
     Wrapper,
     LoginForm,
