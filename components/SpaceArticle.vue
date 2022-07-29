@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row>
-      <v-col cols="12" sm="4" lg="3" v-for="article in articles" :key="article.id">
+      <v-col v-for="article in articles" :key="article.id" cols="12" sm="4" lg="3">
         <nuxt-link :to="`/articles/${ article.id }`">
           <v-card
             class="mx-auto d-flex flex-column"

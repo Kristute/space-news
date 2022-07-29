@@ -12,58 +12,58 @@ import { defineComponent, reactive, computed } from 'vue';
 import useRouter from 'vue-router';
 import NotFoundComponent from './NotFoundComponent.vue';
 
-    declare module 'vue/types/vue' {
-        interface Vue {
+declare module 'vue/types/vue' {
+    interface Vue {
         user: {
             username: string;
             password: string;
         };
         isDisabled: () => boolean;
+    }
+}
+
+export default defineComponent({
+    name: "LoginPage",
+    setup() {
+        const user = reactive({
+            username: '',
+            password: '',
+        })
+
+        // eslint-disable-next-line new-cap
+        const router = new useRouter({
+        mode: 'history',
+        routes: [
+            {
+                path: "/articles",
+                name: "articles",
+                component: () => import('../pages/articles/index.vue')
+            },
+            { path: '*', component: NotFoundComponent }
+        ]
+        })
+
+        const isDisabled = computed(() => {
+            let disabled = false;
+            if(user.username !== "" && user.password !== "") {
+                disabled = true;
+            } 
+            return disabled;
+        });
+
+        const onSubmit = () => {
+            const path = 'articles';
+            window.location.href = path;
+            router.push({ name: path });
+        };
+
+        return {
+            user,
+            isDisabled,
+            onSubmit,
         }
     }
-
-    export default defineComponent({
-        name: "LoginPage",
-        setup() {
-            const user = reactive({
-                username: '',
-                password: '',
-            })
-
-            // eslint-disable-next-line new-cap
-            const router = new useRouter({
-            mode: 'history',
-            routes: [
-                {
-                    path: "/articles",
-                    name: "articles",
-                    component: () => import('../pages/articles/index.vue')
-                },
-                { path: '*', component: NotFoundComponent }
-            ]
-            })
-
-            const isDisabled = computed(() => {
-                let disabled = false;
-                if(user.username !== "" && user.password !== "") {
-                    disabled = true;
-                } 
-                return disabled;
-            });
-
-            const onSubmit = () => {
-                const path = 'articles';
-                window.location.href = path;
-                router.push({ name: path });
-            };
-
-            return {
-                user,
-                isDisabled,
-                onSubmit,
-            }
-        }
-    });
+});
 </script>
 <style scoped>
     #login {

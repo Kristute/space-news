@@ -1,5 +1,6 @@
 <template>
   <Wrapper>
+    <h1 class="text-center my-5">Welcome to space news</h1>
     <LoginForm />
   </Wrapper>
 </template>
@@ -12,8 +13,8 @@ import Wrapper from '@/components/Wrapper.vue';
 export default defineComponent ({
   name: 'Login',
   components: {
-    LoginForm,
     Wrapper,
+    LoginForm,
   }
 })
 </script>
