@@ -1,5 +1,17 @@
 # space-news
 
+## TODO
+
+- [ ] add Auth middleware
+- [ ] validate login form password and username length (can add password complexity)
+- [ ] add layouts for pages
+- [ ] move 404 page to error layouts
+- [ ] migrate to tailwind
+- [ ] add pagination to articles list
+- [ ] add list length select to articles list
+- [ ] use ssg (generated) build
+
+
 ## Build Setup
 
 ```bash
