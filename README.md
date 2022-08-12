@@ -10,6 +10,7 @@
 - [ ] add pagination to articles list
 - [ ] add list length select to articles list
 - [ ] use ssg (generated) build
+- [ ] add reports page
 
 
 ## Build Setup
