@@ -1,12 +1,12 @@
 <template>
-  <Wrapper>
-      <div>
-        <h1>Article #{{ id }}</h1>
+  <WrapperComponent>
+      <div v-if="article">
+        <!-- <h1>Article #{{ id }}</h1> -->
         <div>{{ article.title }}</div>
       </div>
       <v-layout row wrap align-center>
           <v-flex xs8  offset-md2>
-              <v-card v-if="article" class="my-3" hover>
+              <!-- <v-card v-if="article" class="my-3" hover>
                 <v-img
                   height="350px"
                   :src="article.imageUrl"
@@ -47,56 +47,24 @@
                     <a :href="`${article.url }`" target="_blank">Read full article </a>
                   </v-btn>
                 </v-card-actions>
-              </v-card>
+              </v-card> -->
           </v-flex>
         <!-- maybe add section with other articles above -->
         </v-layout>
-   </Wrapper>
+   </WrapperComponent>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-import type { Ref } from 'vue';
+<script setup lang="ts">
+import { onMounted } from 'vue';
+// import { useRoute } from '@nuxtjs/composition-api';
 import type Article from '../../types/Article';
-import Wrapper from '~/components/WrapperComponent.vue';
 
-export default defineComponent ({
-  components: {
-    Wrapper,
-  },
-  setup() {
-    const { pending, data: article } = useLazyFetch('https://api.spaceflightnewsapi.net/v3/articles/' + '15935');
-    console.log(article);
-    const article1: Ref<Article | undefined>  = ref();
+const article = ref<Article>();
+// const route = useRoute();
+// const id = computed(route.value.param.id)
 
-    return {
-      pending,
-      article,
-      article1
-    }
-  },
-  async fetch() {
-    this.article = await fetch('https://api.spaceflightnewsapi.net/v3/articles/' + this.id)
-    .then(res =>
-      res.json()
-    )
-  },
-
-  // head() {
-  //   return {
-  //     title: 'Article #' + this.id,
-  //     meta: [
-  //       {
-  //         hid: 'description',
-  //         name: 'description',
-  //         content: 'What you need to know about Article #' + this.id
-  //       }
-  //     ]
-  //   }
-  // },
-  computed: {
-    id() {
-      return this.$route.params.id
-    }
-  }
+onMounted(() => {
+  fetch('https://api.spaceflightnewsapi.net/v3/articles/' + '16139')
+       .then(res => res.json())
+       .then(a => {article.value = a})
 })
 </script>

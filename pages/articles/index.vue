@@ -14,7 +14,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import SpaceArticle from '../../components/SpaceArticle.vue';
-import Wrapper from '@/components/Wrapper.vue';
+import Wrapper from '~/components/WrapperComponent.vue';
 
 export default defineComponent ({
   components: {
