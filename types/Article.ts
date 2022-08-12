@@ -5,5 +5,8 @@
     imageUrl: string;
     publishedAt: Date;
     updatedAt: Date;
+    summary: string;
+    url: string;
+    newsSite: string;
   };
   

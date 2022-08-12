@@ -1,12 +1,11 @@
 <template>
   <WrapperComponent>
       <div v-if="article">
-        <!-- <h1>Article #{{ id }}</h1> -->
-        <div>{{ article.title }}</div>
+        <h1>Article #{{ id }}</h1>
       </div>
       <v-layout row wrap align-center>
           <v-flex xs8  offset-md2>
-              <!-- <v-card v-if="article" class="my-3" hover>
+              <v-card v-if="article" class="my-3" hover>
                 <v-img
                   height="350px"
                   :src="article.imageUrl"
@@ -18,7 +17,6 @@
                       </v-flex>
                     </v-layout>
                   </v-container>
-                </v-card-media>
                 <v-card-text>
                   {{ article.summary }}
                 </v-card-text>
@@ -27,27 +25,11 @@
                     {{article.newsSite}}
                   </v-chip>
                   <v-spacer></v-spacer>
-                  <v-btn icon class="red--text">
-                    <v-icon small>fa-reddit</v-icon>
-                  </v-btn>
-                  <v-btn icon class="light-blue--text">
-                    <v-icon small>fa-twitter</v-icon>
-                  </v-btn>
-                  <v-btn icon class="blue--text text--darken-4">
-                    <v-icon small>fa-facebook</v-icon>
-                  </v-btn>
-                  <v-btn icon class="red--text">
-                    <v-icon small>fa-google-plus</v-icon>
-                  </v-btn>
-                  <v-btn icon class="blue--text text--darken-4">
-                    <v-icon small>fa-linkedin</v-icon>
-                  </v-btn>
-                  <v-spacer></v-spacer>
                   <v-btn small replace color="info" :href="article.url" target="_blank" >
                     <a :href="`${article.url }`" target="_blank">Read full article </a>
                   </v-btn>
                 </v-card-actions>
-              </v-card> -->
+              </v-card>
           </v-flex>
         <!-- maybe add section with other articles above -->
         </v-layout>
