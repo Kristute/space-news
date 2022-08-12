@@ -54,16 +54,14 @@
    </WrapperComponent>
 </template>
 <script setup lang="ts">
-import { onMounted } from 'vue';
-// import { useRoute } from '@nuxtjs/composition-api';
 import type Article from '../../types/Article';
 
 const article = ref<Article>();
-// const route = useRoute();
-// const id = computed(route.value.param.id)
+const route = useRoute();
+const id = computed(() => route.params.id)
 
 onMounted(() => {
-  fetch('https://api.spaceflightnewsapi.net/v3/articles/' + '16139')
+  fetch('https://api.spaceflightnewsapi.net/v3/articles/' + id.value)
        .then(res => res.json())
        .then(a => {article.value = a})
 })
