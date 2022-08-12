@@ -1,38 +1,50 @@
 <template>
-      <div>
+  <WrapperComponent>
+      <div v-if="article">
         <h1>Article #{{ id }}</h1>
-        <div>{{ article }}</div>
-        <!-- <a :href="`${article.url }`" target="_blank">Read full article </a> -->
       </div>
+      <v-layout row wrap align-center>
+          <v-flex xs8  offset-md2>
+              <v-card v-if="article" class="my-3" hover>
+                <v-img
+                  height="350px"
+                  :src="article.imageUrl"
+                ></v-img>
+                  <v-container fill-height fluid>
+                    <v-layout>
+                      <v-flex xs12 align-end d-flex>
+                        <span class="headline">{{ article.title }}</span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                <v-card-text>
+                  {{ article.summary }}
+                </v-card-text>
+                <v-card-actions>
+                  <v-chip small color="secondary" class="white--text">
+                    {{article.newsSite}}
+                  </v-chip>
+                  <v-spacer></v-spacer>
+                  <v-btn small replace color="info" :href="article.url" target="_blank" >
+                    <a :href="`${article.url }`" target="_blank">Read full article </a>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+          </v-flex>
+        <!-- maybe add section with other articles above -->
+        </v-layout>
+   </WrapperComponent>
 </template>
-<script>
-    export default {
-      data() {
-        return {
-          article: []
-        }
-      },
-      async fetch() {
-        this.article = await fetch('https://api.spaceflightnewsapi.net/v3/articles/' + this.id).then(res =>
-          res.json()
-        )
-      },
-      head() {
-        return {
-          title: 'Article #' + this.id,
-          meta: [
-            {
-              hid: 'description',
-              name: 'description',
-              content: 'What you need to know about Article #' + this.id
-            }
-          ]
-        }
-      },
-      computed: {
-        id() {
-          return this.$route.params.id
-        }
-      }
-    }
+<script setup lang="ts">
+import type Article from '../../types/Article';
+
+const article = ref<Article>();
+const route = useRoute();
+const id = computed(() => route.params.id)
+
+onMounted(() => {
+  fetch('https://api.spaceflightnewsapi.net/v3/articles/' + id.value)
+       .then(res => res.json())
+       .then(a => {article.value = a})
+})
 </script>
