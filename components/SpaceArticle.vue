@@ -4,19 +4,17 @@
       <v-col v-for="article in articles" :key="article.id" cols="12" sm="4" lg="3">
         <nuxt-link :to="`/articles/${ article.id }`">
           <v-card
-            class="mx-auto d-flex flex-column"
-            outlined
+            class="max-w-sm rounded overflow-hidden shadow-lg mb-4"
             hover
-            height="350"
+            min-height="450"
           >
+            <img
+              :src="`${ article.imageUrl }`"
+              :alt="`${ article.title }`"
+              class="h-72 w-full object-cover"
+            />
             <v-list-item three-line>
               <v-list-item-content>
-                <v-img
-                  :src="`${ article.imageUrl }`"
-                  height="150px"
-                  :alt="`${ article.title }`"
-                >
-                </v-img>
                 <v-list-item-title class="text-h5 mb-1">
                     {{ article.title }}
                 </v-list-item-title>
@@ -30,14 +28,11 @@
             </v-list-item>
 
             <v-card-actions class="align-end">
-              <v-btn
-                outlined
-                rounded
-                text
-                class="cyan darken-4 white--text"
+              <button
+                class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
               >
                 Read more
-              </v-btn>
+              </button>
             </v-card-actions>
           </v-card>
         </nuxt-link>
