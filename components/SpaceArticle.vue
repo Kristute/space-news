@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row>
-      <v-col v-for="article in articles" :key="article.id" cols="12" sm="4" lg="3">
+      <v-col v-for="article in props.articles" :key="article.id" cols="12" sm="4" lg="3">
         <nuxt-link :to="`/articles/${ article.id }`">
           <v-card
             class="mx-auto d-flex flex-column"
@@ -45,22 +45,14 @@
     </v-layout>
   </v-container>         
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue';
-import { defineComponent } from 'vue'
 import Article from '../types/Article';
 
-export default defineComponent({
-  props: {
+const props = defineProps({
     articles: {
       type: Array as PropType<Array<Article>>,
       default: null
     } 
-  }
 })
 </script>
-<style lang="scss" scoped>
-a {
-  text-decoration: none;
-}
-</style>
