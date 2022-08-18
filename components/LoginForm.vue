@@ -35,7 +35,7 @@ const isDisabled = computed(() => user.username !== "" && user.password !== "")
 
 const onSubmit = () => {
     const path = 'articles';
-    // window.location.href = path;
+    window.location.href = path;
     router.push({ name: path });
 };
 </script>
