@@ -1,49 +1,34 @@
 <template>
-  <v-container>
-    <v-layout row>
-      <v-col v-for="article in props.articles" :key="article.id" cols="12" sm="4" lg="3">
+  <div>
+    <div>
+      <li v-for="article in props.articles" :key="article.id">
         <nuxt-link :to="`/articles/${ article.id }`">
-          <v-card
-            class="mx-auto d-flex flex-column"
-            outlined
-            hover
-            height="350"
-          >
-            <v-list-item three-line>
-              <v-list-item-content>
-                <v-img
-                  :src="`${ article.imageUrl }`"
-                  height="150px"
-                  :alt="`${ article.title }`"
-                >
-                </v-img>
-                <v-list-item-title class="text-h5 mb-1">
+          <div class="mx-auto d-flex flex-column">
+            <div>
+              <div>
+                <img :src="`${ article.imageUrl }`" :alt="`${ article.title }`" />
+                <h2 class="text-h5 mb-1">
                     {{ article.title }}
-                </v-list-item-title>
-                <v-list-item-subtitle>
+                </h2>
+                <div>
                   Published: {{ article.publishedAt }}
-                </v-list-item-subtitle>
-                <v-list-item-subtitle>
+                </div>
+                <div>
                   Updated: {{ article.updatedAt }}
-                  </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+                </div>
+              </div>
+            </div>
 
-            <v-card-actions class="align-end">
-              <v-btn
-                outlined
-                rounded
-                text
-                class="cyan darken-4 white--text"
-              >
+            <div class="align-end">
+              <button class="cyan darken-4 white--text" >
                 Read more
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+              </button>
+            </div>
+          </div>
         </nuxt-link>
-      </v-col>
-    </v-layout>
-  </v-container>         
+      </li>
+    </div>
+  </div>         
 </template>
 <script setup lang="ts">
 import { Article } from '../types/Article';
