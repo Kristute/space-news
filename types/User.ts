@@ -1,5 +1,5 @@
 
-export default interface User {
+export type User = {
     username: string;
     password: string;
 };

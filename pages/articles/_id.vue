@@ -36,7 +36,7 @@
    </WrapperComponent>
 </template>
 <script setup lang="ts">
-import type Article from '../../types/Article';
+import { Article } from '../../types/Article';
 
 const article = ref<Article>();
 const route = useRoute();

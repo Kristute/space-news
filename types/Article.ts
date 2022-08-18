@@ -1,5 +1,5 @@
 
-export default interface Article {
+export type Article = {
     id: number;
     title: string;
     imageUrl: string;

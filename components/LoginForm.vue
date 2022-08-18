@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
 import useRouter from 'vue-router';
-import User from '../types/User';
+import { User } from '../types/User';
 import NotFoundComponent from './NotFoundComponent.vue';
 
 const user = reactive<User>({
@@ -31,17 +31,11 @@ routes: [
 ]
 })
 
-const isDisabled = computed(() => {
-    let disabled = false;
-    if(user.username !== "" && user.password !== "") {
-        disabled = true;
-    } 
-    return disabled;
-});
+const isDisabled = computed(() => user.username !== "" && user.password !== "")
 
 const onSubmit = () => {
     const path = 'articles';
-    window.location.href = path;
+    // window.location.href = path;
     router.push({ name: path });
 };
 </script>

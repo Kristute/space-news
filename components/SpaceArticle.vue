@@ -46,13 +46,11 @@
   </v-container>         
 </template>
 <script setup lang="ts">
-import type { PropType } from 'vue';
-import Article from '../types/Article';
+import { Article } from '../types/Article';
 
-const props = defineProps({
-    articles: {
-      type: Array as PropType<Array<Article>>,
-      default: null
-    } 
-})
+interface ArticlesProps {
+    articles: Article[];
+}
+
+const props = withDefaults(defineProps<ArticlesProps>(),{});
 </script>
