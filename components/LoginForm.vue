@@ -9,34 +9,19 @@
 </template>
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
-import useRouter from 'vue-router';
 import { User } from '../types/User';
-import NotFoundComponent from './NotFoundComponent.vue';
 
 const user = reactive<User>({
     username: '',
     password: '',
 })
 
-// eslint-disable-next-line new-cap
-const router = new useRouter({
-mode: 'history',
-routes: [
-    {
-        path: "/articles",
-        name: "articles",
-        component: () => import('../pages/articles/index.vue')
-    },
-    { path: '*', component: NotFoundComponent }
-]
-})
+const router = useRouter();
 
 const isDisabled = computed(() => user.username !== "" && user.password !== "")
 
 const onSubmit = () => {
-    const path = 'articles';
-    window.location.href = path;
-    router.push({ name: path });
+    router.push({ name: 'articles' });
 };
 </script>
 <style scoped>

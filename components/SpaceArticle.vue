@@ -37,5 +37,5 @@ interface ArticlesProps {
     articles: Article[];
 }
 
-const props = withDefaults(defineProps<ArticlesProps>(),{});
+const props = defineProps<ArticlesProps>();
 </script>
