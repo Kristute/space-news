@@ -47,10 +47,4 @@ export default defineNuxtConfig ({
       },
     },
   },
-
-  vuetify: {
-    theme: {
-      disable: true,
-    },
-  },
 })
