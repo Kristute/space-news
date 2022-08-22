@@ -12,7 +12,8 @@
   </WrapperComponent>
 </template>
 <script setup lang="ts">
-  const { pending, data: articles } = useLazyFetch('https://api.spaceflightnewsapi.net/v3/articles');
+import { Article } from '../../types/Article';
+const { pending, data: articles } = useLazyFetch<Array<Article>>('https://api.spaceflightnewsapi.net/v3/articles');
 </script>
 <style lang="scss" scoped>
   .headline {

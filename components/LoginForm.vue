@@ -16,10 +16,9 @@ const user = reactive<User>({
     password: '',
 })
 
-const router = useRouter();
-
 const isDisabled = computed(() => user.username !== "" && user.password !== "")
 
+const router = useRouter();
 const onSubmit = () => {
     router.push({ name: 'articles' });
 };
