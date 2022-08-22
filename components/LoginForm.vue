@@ -7,63 +7,21 @@
     </form>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, computed } from 'vue';
-import useRouter from 'vue-router';
-import NotFoundComponent from './NotFoundComponent.vue';
+<script setup lang="ts">
+import { reactive, computed } from 'vue';
+import { User } from '../types/User';
 
-declare module 'vue/types/vue' {
-    interface Vue {
-        user: {
-            username: string;
-            password: string;
-        };
-        isDisabled: () => boolean;
-    }
-}
+const user = reactive<User>({
+    username: '',
+    password: '',
+})
 
-export default defineComponent({
-    name: "LoginPage",
-    setup() {
-        const user = reactive({
-            username: '',
-            password: '',
-        })
+const isDisabled = computed(() => user.username !== "" && user.password !== "")
 
-        // eslint-disable-next-line new-cap
-        const router = new useRouter({
-        mode: 'history',
-        routes: [
-            {
-                path: "/articles",
-                name: "articles",
-                component: () => import('../pages/articles/index.vue')
-            },
-            { path: '*', component: NotFoundComponent }
-        ]
-        })
-
-        const isDisabled = computed(() => {
-            let disabled = false;
-            if(user.username !== "" && user.password !== "") {
-                disabled = true;
-            } 
-            return disabled;
-        });
-
-        const onSubmit = () => {
-            const path = 'articles';
-            window.location.href = path;
-            router.push({ name: path });
-        };
-
-        return {
-            user,
-            isDisabled,
-            onSubmit,
-        }
-    }
-});
+const router = useRouter();
+const onSubmit = () => {
+    router.push({ name: 'articles' });
+};
 </script>
 <style scoped>
     #login {
