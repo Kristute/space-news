@@ -1,4 +1,3 @@
-
 export type Article = {
     id: number;
     title: string;
@@ -9,4 +8,3 @@ export type Article = {
     url: string;
     newsSite: string;
 };
-  

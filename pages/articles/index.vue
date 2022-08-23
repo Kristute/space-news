@@ -1,6 +1,6 @@
 <template>
   <WrapperComponent>
-      <div class="headline">
+      <div class="text-center my-10">
         <h1>Articles</h1>
       </div>
       <div v-if="pending">
@@ -15,9 +15,3 @@
 import { Article } from '../../types/Article';
 const { pending, data: articles } = useLazyFetch<Array<Article>>('https://api.spaceflightnewsapi.net/v3/articles');
 </script>
-<style lang="scss" scoped>
-  .headline {
-    text-align: center;
-    margin: 50px;
-  }
-</style>
