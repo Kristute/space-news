@@ -1,6 +1,9 @@
 <template>
   <WrapperComponent>
-    <h1 class="text-center my-5">Welcome to space news</h1>
+    <Header :text="'Welcome to Space News'"/>
     <LoginForm />
   </WrapperComponent>
 </template>
+<script setup lang="ts">
+import Header from '../components/Header.vue';
+</script>
