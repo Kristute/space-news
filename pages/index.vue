@@ -1,12 +1,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import WrapperComponent from '../components/WrapperComponent.vue';
+import MainLayout from '../components/MainLayout.vue';
 
 
 export default defineComponent ({
   name: 'App',
   components: {
-    WrapperComponent,
+    MainLayout,
   },
   fetch({redirect}) {
     redirect('/login')

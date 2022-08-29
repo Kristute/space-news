@@ -1,9 +1,9 @@
 <template>
-  <WrapperComponent>
-    <Header :text="'Welcome to Space News'"/>
+  <MainLayout>
+    <Title :text="'Welcome to Space News'"/>
     <LoginForm />
-  </WrapperComponent>
+  </MainLayout>
 </template>
 <script setup lang="ts">
-import Header from '../components/Header.vue';
+import Title from '../components/Title.vue';
 </script>

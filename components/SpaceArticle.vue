@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-wrap mb-4 ml-2 mr-9 xl:ml-10 xl:mr-0">
+  <div class="flex flex-wrap -mx-4">
     <div 
       v-for="article in props.articles" 
       :key="article.id" 
-      class="sm:w-full md:w-1/2 lg:w-1/3 max-w-sm mb-10 ml-5 2xl:ml-10 rounded overflow-hidden shadow-lg flex"
+      class="w-full sm:w-1/2 xl:w-1/4 p-4"
     >
-      <nuxt-link :to="`/articles/${ article.id }`" class="flex flex-col justify-between">
+      <nuxt-link :to="`/articles/${ article.id }`" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div>
             <img 
               :src="`${ article.imageUrl }`" 
@@ -16,10 +16,10 @@
               <h2 class="font-bold text-lg mb-2 max-h-14 overflow-hidden text-ellipsis whitespace-nowrap w-80">
                   {{ article.title }}
               </h2>
-              <div class="text-gray-700 text-base">
-                Published: {{ article.publishedAt }}
+              <div class="text-gray-700 text-base block">
+                <p>Published: {{ article.publishedAt }}</p>
               
-                Updated: {{ article.updatedAt }}
+                <p>Updated: {{ article.updatedAt }}</p>
               </div>
             </div>
         </div>

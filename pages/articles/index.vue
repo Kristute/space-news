@@ -1,16 +1,16 @@
 <template>
-  <WrapperComponent>
-      <Header :text="'Articles'" />
+  <MainLayout>
+      <Title :text="'Articles'" />
       <div v-if="pending">
         Loading ...
       </div>
       <div v-else>
         <SpaceArticle :articles="articles" />
       </div>
-  </WrapperComponent>
+  </MainLayout>
 </template>
 <script setup lang="ts">
-import Header from '../../components/Header.vue';
+import Title from '../../components/Title.vue';
 import { Article } from '../../types/Article';
 
 const { pending, data: articles } = useLazyFetch<Array<Article>>('https://api.spaceflightnewsapi.net/v3/articles');
