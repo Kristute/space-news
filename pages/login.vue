@@ -1,6 +1,6 @@
 <template>
-  <WrapperComponent>
-    <h1 class="text-center my-5">Welcome to space news</h1>
+  <div>
+    <Title :text="'Welcome to Space News'" />
     <LoginForm />
-  </WrapperComponent>
+  </div>
 </template>
