@@ -9,16 +9,19 @@
         v-model="user.username"
         :placeholder="'Username'"
         :type="'text'"
+        class="mb-4"
       />
       <BaseInput
         v-model="user.password"
         :placeholder="'Password'"
         :type="'password'"
+        class="mb-4"
       />
       <PrimaryButton
         :disabled="!isDisabled"
         :type="'submit'"
         :value="'Login'"
+        class="mb-4"
       />
     </form>
   </div>
@@ -26,8 +29,6 @@
 <script setup lang="ts">
 import { reactive, computed } from 'vue'
 import { User } from '../types/User'
-import BaseInput from '../components/BaseInput.vue'
-import PrimaryButton from '../components/PrimaryButton.vue'
 
 const user = reactive<User>({
   username: '',

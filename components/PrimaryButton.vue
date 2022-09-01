@@ -1,34 +1,19 @@
 <template>
-  <div class="mb-4">
+  <div>
     <input
       :type="type"
       :value="value"
       :disabled="disabled"
-      class="bg-gray-400 text-white font-bold py-2 px-4 mt-10 w-full rounded-full"
-      :class="{
-        'bg-pink-700 hover:bg-pink-900 focus:outline-none focus:shadow-outline':
-          disabled === false,
-      }"
+      class="disabled:bg-gray-400 disabled:cursor-default text-white font-bold py-2 px-4 mt-10 w-full rounded-full bg-pink-700 hover:bg-pink-900 focus:outline-stone-900 focus:shadow-outline cursor-pointer"
     />
   </div>
 </template>
 <script setup lang="ts">
-defineProps({
-  type: {
-    type: String,
-    required: true,
-  },
-  value: {
-    type: [String, Number],
-    default: '',
-  },
-  isDisabled: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-})
+interface PButtonProps {
+  type: string
+  value: string | number
+  disabled: boolean
+}
+
+defineProps<PButtonProps>()
 </script>
