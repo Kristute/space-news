@@ -7,7 +7,7 @@
         <div
           class="mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl"
         ></div>
-        <div v-if="props.error?.statusCode === '404'">
+        <div v-if="error?.statusCode === '404'">
           <h1 class="font-bold text-pink-600 text-9xl">404</h1>
 
           <h6
@@ -38,11 +38,11 @@
 </template>
 
 <script setup lang="ts">
+// TODO: edit layout, because now it uses default
 interface ErrorPageProps {
   error: {
     statusCode: string
   }
 }
-
-const props = defineProps<ErrorPageProps>()
+defineProps<ErrorPageProps>()
 </script>
