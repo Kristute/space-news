@@ -1,45 +1,38 @@
-import { ref, Ref } from 'vue';
-import axios from 'axios';
-
-import { usePagination } from '../src/useClientSidePagination';
+import { ref, Ref, onMounted } from 'vue';
 import { Article } from '../types/Article'
+import { get } from './utils/client'
 
 interface ArticlesProps {
   articles: Article[]
 }
 
-const URL = "https://api.spaceflightnewsapi.net/v3/articles/";
-
 export function useArticlesApi(
-  currentPage: Ref<number>,
-  rowsPerPage?: Ref<number>
+  itemPerPage: number,
 ) {
   const articles: Ref<ArticlesProps[]> = ref([]);
+  const totalArticlesCount: Ref<number> = ref(0);
 
-  const articlesAreLoading = ref(false);
-
-  const { paginatedArray, numberOfPages } = usePagination<ArticlesProps>({
-    rowsPerPage,
-    arrayToPaginate: articles,
-    currentPage
-  });
-
-  const loadArticles = async () => {
-    articlesAreLoading.value = true;
+  onMounted(async () => await loadArticlesCount())
+  
+  const loadArticles = async (startMarker) => {
     try {
-      const result = await axios.get(URL);
-      articles.value = result.data;
+      articles.value = await get(`articles?_limit=${itemPerPage}&_start=${startMarker}`);
     } catch (err) {
       console.log(err);
-    } finally {
-        articlesAreLoading.value = false;
+    }
+  }
+
+  const loadArticlesCount = async () => {
+    try {
+      totalArticlesCount.value = await get('articles/count');
+    } catch (err) {
+      console.log(err);
     }
   };
-
+  
   return {
-    articles: paginatedArray,
+    articles,
     loadArticles,
-    articlesAreLoading,
-    numberOfPages
+    totalArticlesCount,
   };
 }

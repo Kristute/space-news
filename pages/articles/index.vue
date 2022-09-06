@@ -1,22 +1,22 @@
 <template>
   <div>
     <Title :text="'Articles'" />
-    <div v-if="pending">Loading ...</div>
+    <Pagination
+      v-if="totalArticlesCount !== 0"
+      :items-total="totalArticlesCount"
+      :items-per-page="LIMIT"
+      @load="loadArticles"
+    />
+    <div v-if="loadArticles.length === 0">Loading ...</div>
     <div v-else>
-      <Pagination v-model="currentPage" :number-of-pages="numberOfPages" />
       <SpaceArticle :articles="articles" />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import { useArticlesApi } from '../../src/useArticlesApi'
 
-const currentPage = ref(1)
-const rowsPerPage = ref(4)
+const LIMIT = 50
 
-const { articles, articlesAreLoading, loadArticles, numberOfPages } =
-  useArticlesApi(currentPage, rowsPerPage)
-
-onMounted(async () => await loadArticles())
+const { articles, loadArticles, totalArticlesCount } = useArticlesApi(LIMIT)
 </script>
