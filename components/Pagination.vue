@@ -8,54 +8,33 @@
       v-if="numberOfPages >= 1"
       class="bg-white m-0 p-2 flex items-center box-border overflow-hidden break-words content-center rounded-md"
     >
-      <!-- TODO: move to custom component -->
-      <li
-        class="flex cursor-pointer mb-0 disabled:cursor-not-allowed"
-        aria-label="go to previous page"
+      <PaginationItem
+        :aria-label="'go to previous page'"
         :disabled="{
           disabled: currentPage === 1,
         }"
+        :src="require('../src/assets/img/arrow.svg')"
+        :img-class="'transform rotate-180'"
         @click="previous()"
-      >
-        <div
-          class="text-pink-400 rounded py-2 px-4 font-bold hover:bg-pink-900 hover:text-pink-100 border-none disabled:bg-gray-400"
-          :class="{
-            disabled: currentPage === 1,
-          }"
-        >
-          &laquo;
-        </div>
-      </li>
-      <li
+      />
+      <PaginationItem
         v-for="index in numberOfPages"
         :key="index"
         :aria-label="'go to page ' + index"
-        class="flex cursor-pointer mb-0"
+        :number="index"
+        :number-class="{
+          'bg-pink-900 text-white hover:border-none': currentPage === index,
+        }"
         @click="loadData(index)"
-      >
-        <div
-          class="text-pink-400 rounded py-2 px-4 font-bold hover:bg-pink-900 hover:text-pink-100 border-none disabled:bg-gray-400"
-          :class="{
-            'bg-pink-900 text-white hover:border-none': currentPage === index,
-          }"
-        >
-          {{ index }}
-        </div>
-      </li>
-      <li
-        class="flex cursor-pointer mb-0 disabled:cursor-not-allowed"
-        :class="{
+      />
+      <PaginationItem
+        :aria-label="'go to next page'"
+        :disabled="{
           disabled: currentPage === numberOfPages || !numberOfPages,
         }"
-        aria-label="go to next page"
+        :src="require('../src/assets/img/arrow.svg')"
         @click="next()"
-      >
-        <div
-          class="text-pink-400 rounded py-2 px-4 font-bold hover:bg-pink-900 hover:text-pink-100 border-none disabled:bg-gray-400"
-        >
-          &raquo;
-        </div>
-      </li>
+      />
     </ul>
   </div>
 </template>
@@ -66,7 +45,6 @@ import { Ref } from 'vue'
 interface PaginationProps {
   itemsTotal: number
   itemsPerPage: number
-  load: Function
 }
 const props = defineProps<PaginationProps>()
 const { query } = useRoute()
