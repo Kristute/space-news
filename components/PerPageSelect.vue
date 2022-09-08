@@ -1,0 +1,27 @@
+<template>
+  <select
+    v-if="props.currentAmount"
+    @change="changeCurrentAmount"
+    class="bg-gray-50 border border-gray-300 ml-auto text-pink-400 rounded py-2 px-4 font-bold block w-20 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  >
+    <option
+      v-for="option in props.options"
+      :key="option.label"
+      :value="option.value"
+    >
+      {{ option.label }}
+    </option>
+  </select>
+</template>
+<script lang="ts" setup>
+interface PerPageProps {
+  options: Array<any>
+  currentAmount: number
+}
+const props = defineProps<PerPageProps>()
+const emit = defineEmits(['change-current-amount'])
+
+const changeCurrentAmount = (event) => {
+  emit('change-current-amount', event.target.value)
+}
+</script>

@@ -1,12 +1,19 @@
 <template>
   <div>
     <Title :text="'Articles'" />
-    <Pagination
-      v-if="totalArticlesCount !== 0"
-      :items-total="totalArticlesCount"
-      :items-per-page="LIMIT"
-      @load="loadArticles"
-    />
+    <div class="flex">
+      <Pagination
+        v-if="totalArticlesCount !== 0"
+        :items-total="totalArticlesCount"
+        :items-per-page="currentAmount"
+        @load="loadArticles"
+      />
+      <PerPageSelect
+        :options="amount"
+        :current-amount="currentAmount"
+        @change-current-amount="loadAmount"
+      />
+    </div>
     <div v-if="loadArticles.length === 0">Loading ...</div>
     <div v-else>
       <SpaceArticle :articles="articles" />
@@ -14,9 +21,20 @@
   </div>
 </template>
 <script setup lang="ts">
+import { Ref } from 'vue'
 import { useArticlesApi } from '../../src/useArticlesApi'
 
-const LIMIT = 50
+const currentAmount: Ref<number> = ref(50)
+const loadAmount = (value) => {
+  currentAmount.value = parseInt(value)
+}
 
-const { articles, loadArticles, totalArticlesCount } = useArticlesApi(LIMIT)
+const amount = [
+  { value: 50, label: '50' },
+  { value: 100, label: '100' },
+  { value: 200, label: '200' },
+]
+
+const { articles, loadArticles, totalArticlesCount } =
+  useArticlesApi(currentAmount)
 </script>

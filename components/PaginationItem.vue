@@ -1,13 +1,16 @@
 <template>
   <li
-    :class="{ disabled: props.disabled }"
-    class="flex cursor-pointer mb-0 disabled:cursor-not-allowed"
+    class="flex cursor-pointer mb-0 border-none"
     :aria-label="props.ariaLabel"
-    @click="() => $emit('click')"
+    @click="triggerClick()"
   >
     <div
       v-if="props.src"
-      class="w-10 h-10 flex justify-center rounded font-bold hover:bg-pink-900 border-none disabled:bg-gray-400"
+      :disabled="props.isDisabled"
+      class="w-10 h-10 flex justify-center rounded font-bold hover:bg-pink-900 hover:text-pink-100"
+      :class="{
+        'hover:bg-transparent cursor-default': props.isDisabled === true,
+      }"
     >
       <img
         :src="props.src"
@@ -16,25 +19,31 @@
       />
     </div>
 
-    <div
+    <button
       v-else
-      class="text-pink-400 rounded py-2 px-4 font-bold hover:bg-pink-900 hover:text-pink-100 border-none disabled:bg-gray-400"
+      :disabled="typeof props.text === 'string'"
+      class="text-pink-400 rounded py-2 px-4 font-bold hover:bg-pink-900 hover:text-pink-100 border-none cursor-pointer disabled:bg-transparent disabled:cursor-default disabled:hover:bg-transparent disabled:hover:text-pink-400"
       :class="props.numberClass"
     >
-      {{ props.number }}
-    </div>
+      {{ props.text }}
+    </button>
   </li>
 </template>
 <script lang="ts" setup>
 interface PaginationItemProps {
   ariaLabel: string
-  disabled: object
-  number?: number
+  isDisabled: boolean
+  text?: (string | number)[]
   src?: string
-  imgClass: string
-  numberClass: string
+  imgClass?: string
+  numberClass?: Object
 }
 const props = defineProps<PaginationItemProps>()
 
-defineEmits(['click'])
+const emit = defineEmits(['click'])
+
+const triggerClick = () => {
+  if (typeof props.text === 'string') return
+  emit('click')
+}
 </script>
