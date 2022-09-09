@@ -77,7 +77,7 @@ const pages = computed(() => {
   }
   // if other pages - show next page, then dots and last page
   if (currentPage.value + 2 < numberOfPages.value) {
-    tempPages.push(currentPage.value + 1, '..', numberOfPages.value)
+    tempPages.push(currentPage.value + 1, '...', numberOfPages.value)
   }
   // if page before last page - show last page
   if (currentPage.value + 1 === numberOfPages.value) {

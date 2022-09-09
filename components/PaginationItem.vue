@@ -6,7 +6,6 @@
   >
     <div
       v-if="props.src"
-      :disabled="props.isDisabled"
       class="w-10 h-10 flex justify-center rounded font-bold hover:bg-pink-900 hover:text-pink-100"
       :class="{
         'hover:bg-transparent cursor-default': props.isDisabled === true,
@@ -32,8 +31,8 @@
 <script lang="ts" setup>
 interface PaginationItemProps {
   ariaLabel: string
-  isDisabled: boolean
-  text?: (string | number)[]
+  isDisabled?: boolean
+  text?: string | number
   src?: string
   imgClass?: string
   numberClass?: Object
