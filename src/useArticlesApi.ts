@@ -11,6 +11,7 @@ export function useArticlesApi(
 ) {
   const articles: Ref<ArticlesProps[]> = ref([]);
   const totalArticlesCount: Ref<number> = ref(0);
+  const errors: Array<string> = []
 
   onMounted(async () => await loadArticlesCount())
   
@@ -18,7 +19,7 @@ export function useArticlesApi(
     try {
       articles.value = await get(`articles?_limit=${itemPerPage.value}&_start=${startMarker}`);
     } catch (err) {
-      console.log(err);
+      errors.push(err)
     }
   }
 
@@ -26,7 +27,7 @@ export function useArticlesApi(
     try {
       totalArticlesCount.value = await get('articles/count');
     } catch (err) {
-      console.log(err);
+      errors.push(err)
     }
   };
   
@@ -34,5 +35,6 @@ export function useArticlesApi(
     articles,
     loadArticles,
     totalArticlesCount,
+    errors
   };
 }

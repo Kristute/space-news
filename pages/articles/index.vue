@@ -1,7 +1,8 @@
 <template>
   <div>
     <Title :text="'Articles'" />
-    <div class="flex">
+    <ErrorMessage :errors="errors" />
+    <div class="sm:flex">
       <Pagination
         v-if="totalArticlesCount !== 0"
         :items-total="totalArticlesCount"
@@ -35,6 +36,6 @@ const amount = [
   { value: 200, label: '200' },
 ]
 
-const { articles, loadArticles, totalArticlesCount } =
+const { articles, loadArticles, totalArticlesCount, errors } =
   useArticlesApi(currentAmount)
 </script>

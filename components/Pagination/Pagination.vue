@@ -6,29 +6,29 @@
   >
     <ul
       v-if="numberOfPages >= 1"
-      class="bg-white m-0 p-2 flex items-center box-border overflow-hidden break-words content-center rounded-md"
+      class="bg-white m-0 sm:p-2 flex items-center box-border overflow-hidden break-words content-center rounded-md text-xs sm:text-base"
     >
       <PaginationItem
         :aria-label="'go to previous page'"
         :is-disabled="currentPage === 1"
-        :src="require('../src/assets/img/arrow.svg')"
+        :src="ArrowIcon"
         :img-class="'transform rotate-180'"
         @click="previous()"
       />
       <PaginationItem
-        v-for="index in pages"
-        :key="index"
-        :aria-label="'go to page ' + index"
-        :text="index"
+        v-for="(page, index) in pages"
+        :key="`${index}-${page}`"
+        :aria-label="`go to page ${page}`"
+        :text="page"
         :number-class="{
-          'bg-pink-900 text-white hover:border-none': currentPage === index,
+          'bg-pink-900 text-white hover:border-none': currentPage === page,
         }"
-        @click="loadData(index)"
+        @click="loadData(page)"
       />
       <PaginationItem
         :aria-label="'go to next page'"
         :is-disabled="currentPage === numberOfPages || !numberOfPages"
-        :src="require('../src/assets/img/arrow.svg')"
+        :src="ArrowIcon"
         @click="next()"
       />
     </ul>
@@ -37,6 +37,7 @@
 
 <script lang="ts" setup>
 import { Ref } from 'vue'
+import ArrowIcon from '../../src/assets/icons/arrow.svg'
 
 interface PaginationProps {
   itemsTotal: number
