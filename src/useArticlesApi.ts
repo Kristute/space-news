@@ -5,7 +5,7 @@ import { get } from './utils/client'
 interface ArticlesProps {
   articles: Article[]
 }
-let error: string = '';
+let error: Error;
 
 export function useArticlesApi(
   itemPerPage: Ref,
