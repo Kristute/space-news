@@ -23,7 +23,7 @@
         :number-class="{
           'bg-pink-900 text-white hover:border-none': currentPage === page,
         }"
-        @click="loadData(page)"
+        @click="setQueryParams(page)"
       />
       <PaginationItem
         :aria-label="'go to next page'"
@@ -53,7 +53,7 @@ const currentPage = computed(() => {
 const numberOfPages = computed(() => {
   const newNumberOfPages = Math.ceil(props.itemsTotal / props.itemsPerPage)
   // if page does not exist after changing items per page - go to first page
-  if (newNumberOfPages < currentPage.value) loadData(1)
+  if (newNumberOfPages < currentPage.value) setQueryParams(1)
   return newNumberOfPages
 })
 
@@ -88,26 +88,23 @@ const pages = computed(() => {
 
   return tempPages
 })
-const emit = defineEmits(['load'])
 
-const loadData = (page) => {
+const setQueryParams = (page) => {
   router.push({
     path: '/articles',
     query: { page: page.toString(), amount: props.itemsPerPage.toString() },
   })
-  // start marker (offset) to load articles per page
-  emit('load', (page - 1) * props.itemsPerPage)
 }
 
-onMounted(async () => await loadData(currentPage.value))
+onMounted(async () => await setQueryParams(currentPage.value))
 
 const previous = () => {
   if (currentPage.value === 1) return
-  loadData(currentPage.value - 1)
+  setQueryParams(currentPage.value - 1)
 }
 
 const next = () => {
   if (currentPage.value === numberOfPages.value) return
-  loadData(currentPage.value + 1)
+  setQueryParams(currentPage.value + 1)
 }
 </script>
