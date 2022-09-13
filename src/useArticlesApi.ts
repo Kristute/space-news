@@ -5,13 +5,14 @@ import { get } from './utils/client'
 interface ArticlesProps {
   articles: Article[]
 }
+let error: string = '';
 
 export function useArticlesApi(
   itemPerPage: Ref,
 ) {
   const articles: Ref<ArticlesProps[]> = ref([]);
   const totalArticlesCount: Ref<number> = ref(0);
-  const errors: Array<string> = []
+  
 
   onMounted(async () => await loadArticlesCount())
   
@@ -19,7 +20,7 @@ export function useArticlesApi(
     try {
       articles.value = await get(`articles?_limit=${itemPerPage.value}&_start=${startMarker}`);
     } catch (err) {
-      errors.push(err)
+      error = err
     }
   }
 
@@ -27,7 +28,7 @@ export function useArticlesApi(
     try {
       totalArticlesCount.value = await get('articles/count');
     } catch (err) {
-      errors.push(err)
+      error = err
     }
   };
   
@@ -35,6 +36,6 @@ export function useArticlesApi(
     articles,
     loadArticles,
     totalArticlesCount,
-    errors
+    error
   };
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Title :text="'Articles'" />
-    <ErrorMessage :errors="errors" />
+    <ErrorMessage :error="error" />
     <div class="sm:flex">
       <Pagination
         v-if="totalArticlesCount !== 0"
@@ -22,12 +22,21 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Ref } from 'vue'
 import { useArticlesApi } from '../../src/useArticlesApi'
+const route = useRoute()
+const router = useRouter()
 
-const currentAmount: Ref<number> = ref(50)
+const currentAmount = computed(() => {
+  return typeof route.query.amount === 'string'
+    ? parseInt(route.query.amount)
+    : 50
+})
+
 const loadAmount = (value) => {
-  currentAmount.value = parseInt(value)
+  router.push({
+    path: '/articles',
+    query: { ...route.query, amount: value },
+  })
 }
 
 const amount = [
@@ -36,6 +45,6 @@ const amount = [
   { value: 200, label: '200' },
 ]
 
-const { articles, loadArticles, totalArticlesCount, errors } =
+const { articles, loadArticles, totalArticlesCount, error } =
   useArticlesApi(currentAmount)
 </script>

@@ -40,8 +40,6 @@
 </template>
 
 <script setup lang="ts">
-// defineComponent({ layout: 'blank' })
-
 interface ErrorPageProps {
   error: {
     statusCode: string

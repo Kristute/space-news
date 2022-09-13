@@ -11,7 +11,7 @@
       <PaginationItem
         :aria-label="'go to previous page'"
         :is-disabled="currentPage === 1"
-        :src="ArrowIcon"
+        :src="arrowIcon"
         :img-class="'transform rotate-180'"
         @click="previous()"
       />
@@ -28,7 +28,7 @@
       <PaginationItem
         :aria-label="'go to next page'"
         :is-disabled="currentPage === numberOfPages || !numberOfPages"
-        :src="ArrowIcon"
+        :src="arrowIcon"
         @click="next()"
       />
     </ul>
@@ -36,18 +36,19 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref } from 'vue'
-import ArrowIcon from '../../src/assets/icons/arrow.svg'
+import arrowIcon from '../../src/assets/icons/arrow.svg'
 
 interface PaginationProps {
   itemsTotal: number
   itemsPerPage: number
 }
 const props = defineProps<PaginationProps>()
-const { query } = useRoute()
+const route = useRoute()
 const router = useRouter()
-const pageNumber = typeof query.page === 'string' ? parseInt(query.page) : 1
-const currentPage: Ref<number> = ref(pageNumber)
+
+const currentPage = computed(() => {
+  return typeof route.query.page === 'string' ? parseInt(route.query.page) : 1
+})
 
 const numberOfPages = computed(() => {
   const newNumberOfPages = Math.ceil(props.itemsTotal / props.itemsPerPage)
@@ -90,8 +91,10 @@ const pages = computed(() => {
 const emit = defineEmits(['load'])
 
 const loadData = (page) => {
-  currentPage.value = page
-  router.push({ path: '/articles', query: { page: page.toString() } })
+  router.push({
+    path: '/articles',
+    query: { page: page.toString(), amount: props.itemsPerPage.toString() },
+  })
   // start marker (offset) to load articles per page
   emit('load', (page - 1) * props.itemsPerPage)
 }

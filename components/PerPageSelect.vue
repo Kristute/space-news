@@ -8,6 +8,7 @@
       v-for="option in props.options"
       :key="option.label"
       :value="option.value"
+      :selected="props.currentAmount === option.value"
     >
       {{ option.label }}
     </option>

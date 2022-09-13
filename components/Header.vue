@@ -8,7 +8,7 @@
       >
         <a href="/" class="flex items-center">
           <img
-            :src="RocketArrow"
+            :src="rocketArrow"
             class="mr-3 h-6 sm:h-9"
             alt="Space News Logo"
           />
@@ -28,5 +28,5 @@
   </header>
 </template>
 <script lang="ts" setup>
-import RocketArrow from '@/src/assets/icons/rocket.svg'
+import rocketArrow from '@/src/assets/icons/rocket.svg'
 </script>
