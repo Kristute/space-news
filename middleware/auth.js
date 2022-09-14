@@ -1,6 +1,6 @@
-export default function ({redirect, store}) {
+export default function ({route, redirect, store}) {
   const isAuthenticated = !!store.state.auth.username
-  if (!isAuthenticated) {
+  if (!isAuthenticated && route.path !== '/login') {
     redirect({name: 'login'})
   }
 }

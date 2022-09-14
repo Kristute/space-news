@@ -40,10 +40,8 @@
 <script lang="ts" setup>
 import rocketArrow from '@/src/assets/icons/rocket.svg'
 const { $store } = useNuxtApp()
-// const router = useRouter()
+const router = useRouter()
 const logout = () => {
-  $store.commit('auth/setUser', null)
-  $store.commit('auth/setPass', null)
-  // router.push({ name: 'login' })
+  $store.commit('auth/logout', router)
 }
 </script>
