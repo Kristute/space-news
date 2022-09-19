@@ -96,8 +96,6 @@ const setQueryParams = (page) => {
   })
 }
 
-onMounted(async () => await setQueryParams(currentPage.value))
-
 const previous = () => {
   if (currentPage.value === 1) return
   setQueryParams(currentPage.value - 1)
