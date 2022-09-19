@@ -15,6 +15,9 @@
   </select>
 </template>
 <script lang="ts" setup>
+const route = useRoute()
+const router = useRouter()
+
 interface PerPageProps {
   options: Array<any>
   currentAmount: number
@@ -24,5 +27,13 @@ const emit = defineEmits(['change-current-amount'])
 
 const changeCurrentAmount = (event) => {
   emit('change-current-amount', event.target.value)
+  loadAmount(event.target.value)
+}
+
+const loadAmount = (value) => {
+  router.push({
+    path: '/articles',
+    query: { ...route.query, amount: value },
+  })
 }
 </script>

@@ -8,11 +8,7 @@
         :items-total="totalArticlesCount"
         :items-per-page="currentAmount"
       />
-      <PerPageSelect
-        :options="amount"
-        :current-amount="currentAmount"
-        @change-current-amount="loadAmount"
-      />
+      <PerPageSelect :options="amount" :current-amount="currentAmount" />
     </div>
     <div v-if="loadArticles.length === 0">Loading ...</div>
     <div v-else>
@@ -23,7 +19,6 @@
 <script setup lang="ts">
 import { useArticlesApi } from '../../src/useArticlesApi'
 const route = useRoute()
-const router = useRouter()
 
 const pageParams = computed(() => ({
   page: route.query.page,
@@ -31,7 +26,7 @@ const pageParams = computed(() => ({
 }))
 
 watch(pageParams, () => {
-  loadArticles(route.query.page)
+  loadArticles(currentAmount, route.query.page)
 })
 
 const currentAmount = computed(() => {
@@ -40,21 +35,13 @@ const currentAmount = computed(() => {
     : 50
 })
 
-const loadAmount = (value) => {
-  router.push({
-    path: '/articles',
-    query: { ...route.query, amount: value },
-  })
-}
-
 const amount = [
   { value: 50, label: '50' },
   { value: 100, label: '100' },
   { value: 200, label: '200' },
 ]
 
-const { articles, loadArticles, totalArticlesCount, error } =
-  useArticlesApi(currentAmount)
+const { articles, loadArticles, totalArticlesCount, error } = useArticlesApi()
 
-loadArticles(1)
+loadArticles(currentAmount, 1)
 </script>

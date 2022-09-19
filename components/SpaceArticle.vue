@@ -22,9 +22,9 @@
               {{ article.title }}
             </h2>
             <div class="text-gray-700 text-base block">
-              <p>Published: {{ article.publishedAt | formatDate }}</p>
+              <p>Published: {{ formatDate(article.publishedAt) }}</p>
 
-              <p>Updated: {{ article.updatedAt | formatDate }}</p>
+              <p>Updated: {{ formatDate(article.updatedAt) }}</p>
             </div>
           </div>
         </div>
@@ -41,6 +41,7 @@
 </template>
 <script setup lang="ts">
 import { Article } from '../types/Article'
+import { formatDate } from '~/src/utils/filters'
 
 interface ArticlesProps {
   articles: Article[]

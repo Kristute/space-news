@@ -7,18 +7,16 @@ interface ArticlesProps {
 }
 let error: Error;
 
-export function useArticlesApi(
-  itemPerPage: Ref,
-) {
+export function useArticlesApi() {
   const articles: Ref<ArticlesProps[]> = ref([]);
   const totalArticlesCount: Ref<number> = ref(0);
   
 
   onMounted(async () => await loadArticlesCount())
   
-  const loadArticles = async (startMarker) => {
+  const loadArticles = async (articlesLimit, startMarker) => {
     try {
-      articles.value = await get(`articles?_limit=${itemPerPage.value}&_start=${startMarker}`);
+      articles.value = await get(`articles?_limit=${articlesLimit.value}&_start=${startMarker}`);
     } catch (err) {
       error = err
     }
