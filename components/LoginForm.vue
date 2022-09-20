@@ -41,7 +41,10 @@ const user = reactive<User>({
 const isDisabled = computed(() => user.username !== '' && user.password !== '')
 
 const onSubmit = () => {
-  $store.commit('auth/login', user.username, user.password)
+  $store.commit('auth/login', {
+    username: user.username,
+    password: user.password,
+  })
   router.push({ name: 'articles' })
 }
 </script>

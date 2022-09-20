@@ -39,9 +39,9 @@
 </template>
 <script lang="ts" setup>
 import rocketArrow from '@/src/assets/icons/rocket.svg'
+
 const { $store } = useNuxtApp()
-const router = useRouter()
 const logout = () => {
-  $store.commit('auth/logout', router)
+  $store.commit('auth/logout')
 }
 </script>
