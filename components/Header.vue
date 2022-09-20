@@ -6,9 +6,9 @@
       <div
         class="flex flex-wrap justify-between items-center mx-auto w-full sm:w-4/5 max-w-screen-2xl"
       >
-        <a href="https://flowbite.com" class="flex items-center">
+        <a href="/" class="flex items-center">
           <img
-            :src="require('../src/assets/img/rocket.svg')"
+            :src="rocketArrow"
             class="mr-3 h-6 sm:h-9"
             alt="Space News Logo"
           />
@@ -27,3 +27,6 @@
     </nav>
   </header>
 </template>
+<script lang="ts" setup>
+import rocketArrow from '@/src/assets/icons/rocket.svg'
+</script>
