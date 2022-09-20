@@ -5,12 +5,11 @@ import { get } from './utils/client'
 interface ArticlesProps {
   articles: Article[]
 }
-let error: Error;
 
 export function useArticlesApi() {
   const articles: Ref<ArticlesProps[]> = ref([]);
   const totalArticlesCount: Ref<number> = ref(0);
-  
+  let error: any;
 
   onMounted(async () => await loadArticlesCount())
   
