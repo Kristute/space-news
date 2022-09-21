@@ -51,14 +51,15 @@
         </ul>
 
         <div
-          class="checkmark_container"
+          class="rounded-full absolute bg-green-500 w-12 h-12 -top-4 -right-4 flex justify-center items-center transition-opacity duration-500 ease-linear"
           :class="
             checkIsValidPassword ? 'visible opacity-100' : 'hidden opacity-0'
           "
         >
           <svg width="50%" height="50%" viewBox="0 0 140 100">
             <path
-              class="checkmark"
+              class="checkmark w-full h-full fill-transparent stroke-white stroke-[15px]"
+              stroke-linecap="round"
               :class="{ checked: checkIsValidPassword }"
               d="M10,50 l25,40 l95,-70"
             />
@@ -78,7 +79,6 @@
 <script setup lang="ts">
 import { reactive, computed } from 'vue'
 import { User } from '../types/User'
-import PasswordCriteria from './PasswordCriteria.vue'
 
 const { $store } = useNuxtApp()
 const router = useRouter()
@@ -158,6 +158,7 @@ const checkSpecial = computed(() => {
 
 const isDisabled = computed(
   () =>
+    user.username !== '' &&
     user.password !== '' &&
     checkIsValidUsername.value === true &&
     checkIsValidPassword.value === true
@@ -172,27 +173,7 @@ const onSubmit = () => {
 }
 </script>
 <style>
-.checkmark_container {
-  border-radius: 50%;
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  background: #2ecc71;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 0.4s ease;
-}
-
 .checkmark {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: white;
-  stroke-width: 15;
-  stroke-linecap: round;
   stroke-dasharray: 180;
   stroke-dashoffset: 180;
 }
