@@ -55,3 +55,6 @@ onMounted(() => {
     })
 })
 </script>
+<script lang="ts">
+export default { name: 'ArticleID' }
+</script>
