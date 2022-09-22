@@ -5,9 +5,7 @@
       novalidate
       @submit.prevent="onSubmit"
     >
-      <span
-        class="text-red-600"
-        :class="checkIsValidUsername ? 'hidden' : 'visible'"
+      <span v-if="!checkIsValidUsername" class="text-red-600"
         >Username must contain only letters and numbers</span
       >
       <BaseInput
@@ -29,24 +27,24 @@
         <div class="pb-3">Your password must contain:</div>
         <ul class="bg-white p-3 rounded text-gray-500">
           <PasswordCriteria
-            :text="'8 Characters'"
-            :is-criteria-accepted="checkMinimumLength"
+            text="8 Characters"
+            :is-criteria-accepted="hasMinimumLength"
           />
           <PasswordCriteria
-            :text="'Contains Number'"
-            :is-criteria-accepted="checkNumber"
+            text="Contains Number"
+            :is-criteria-accepted="hasNumber"
           />
           <PasswordCriteria
-            :text="'Contains Uppercase'"
-            :is-criteria-accepted="checkUppercase"
+            text="Contains Uppercase"
+            :is-criteria-accepted="hasUppercase"
           />
           <PasswordCriteria
-            :text="'Contains Lowercase'"
-            :is-criteria-accepted="checkLowerCase"
+            text="Contains Lowercase"
+            :is-criteria-accepted="hasLowercase"
           />
           <PasswordCriteria
-            :text="'Contains Special Character'"
-            :is-criteria-accepted="checkSpecial"
+            text="Contains Special Character"
+            :is-criteria-accepted="hasSpecial"
           />
         </ul>
 
@@ -89,71 +87,71 @@ const user = reactive<User>({
 })
 
 const checkIsValidUsername = computed(() => {
-  let isUsernameValid = ref(false)
+  let isUsernameValid = false
 
-  isUsernameValid = ref(/^[A-Za-z0-9]*$/.test(user.username))
+  isUsernameValid = /^[A-Za-z0-9]*$/.test(user.username)
 
-  return isUsernameValid.value
+  return isUsernameValid
 })
 
 const checkIsValidPassword = computed(() => {
-  let isValidPassword = ref(false)
+  let isValidPassword = false
 
   if (
-    checkMinimumLength.value === true &&
-    checkNumber.value === true &&
-    checkUppercase.value === true &&
-    checkLowerCase.value === true &&
-    checkSpecial.value === true
+    hasMinimumLength.value === true &&
+    hasNumber.value === true &&
+    hasUppercase.value === true &&
+    hasLowercase.value === true &&
+    hasSpecial.value === true
   ) {
-    isValidPassword = ref(true)
+    isValidPassword = true
   }
 
-  return isValidPassword.value
+  return isValidPassword
 })
 
-const checkMinimumLength = computed(() => {
-  let hasMinimumLength = ref(false)
+const hasMinimumLength = computed(() => {
+  let checkMinimumLength = false
   if (user.password.length >= 8) {
-    hasMinimumLength = ref(true)
+    checkMinimumLength = true
   } else {
-    hasMinimumLength = ref(false)
+    checkMinimumLength = false
   }
 
-  return hasMinimumLength.value
+  return checkMinimumLength
 })
 
-const checkNumber = computed(() => {
-  let hasNumber = ref(false)
+const hasNumber = computed(() => {
+  let checkNumber = false
 
-  hasNumber = ref(/\d/.test(user.password))
+  checkNumber = /\d/.test(user.password)
 
-  return hasNumber.value
+  return checkNumber
 })
 
-const checkUppercase = computed(() => {
-  let hasUppercase = ref(false)
+const hasUppercase = computed(() => {
+  let checkUppercase = false
 
-  hasUppercase = ref(/[A-Z]/.test(user.password))
+  checkUppercase = /[A-Z]/.test(user.password)
 
-  return hasUppercase.value
+  return checkUppercase
 })
 
-const checkLowerCase = computed(() => {
-  let hasLowercase = ref(false)
+const hasLowercase = computed(() => {
+  let checkLowerCase = false
 
-  hasLowercase = ref(/[a-z]/.test(user.password))
+  checkLowerCase = /[a-z]/.test(user.password)
 
-  return hasLowercase.value
+  return checkLowerCase
 })
 
-const checkSpecial = computed(() => {
+const hasSpecial = computed(() => {
   const format = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/
-  let hasSpecial = ref(false)
+  let checkSpecial = false
 
-  hasSpecial = ref(format.test(user.password))
+  checkSpecial = format.test(user.password)
 
-  return hasSpecial.value
+  return checkSpecial
 })
 
 const isDisabled = computed(
@@ -172,7 +170,7 @@ const onSubmit = () => {
   router.push({ name: 'articles' })
 }
 </script>
-<style>
+<style scoped>
 .checkmark {
   stroke-dasharray: 180;
   stroke-dashoffset: 180;
