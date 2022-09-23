@@ -10,8 +10,8 @@
       >
       <BaseInput
         v-model="user.username"
-        :placeholder="'Username'"
-        :type="'text'"
+        placeholder="Username"
+        type="text"
         class="mb-4"
         :class="{ 'border rounded border-red-500': !checkIsValidUsername }"
       />
@@ -19,8 +19,8 @@
       <div class="relative">
         <BaseInput
           v-model="user.password"
-          :placeholder="'Password'"
-          :type="'password'"
+          placeholder="Password"
+          type="password"
           autocomplete="off"
           class="mb-4"
         />
@@ -67,8 +67,8 @@
 
       <PrimaryButton
         :disabled="!isDisabled"
-        :type="'submit'"
-        :value="'Login'"
+        type="submit"
+        value="Login"
         class="mb-4"
       />
     </form>
@@ -86,80 +86,37 @@ const user = reactive<User>({
   password: '',
 })
 
-const checkIsValidUsername = computed(() => {
-  let isUsernameValid = false
+const checkIsValidUsername = computed(() =>
+  /^[A-Za-z0-9]*$/.test(user.username)
+)
 
-  isUsernameValid = /^[A-Za-z0-9]*$/.test(user.username)
+const checkIsValidPassword = computed(
+  () =>
+    hasMinimumLength.value &&
+    hasNumber.value &&
+    hasUppercase.value &&
+    hasLowercase.value &&
+    hasSpecial.value
+)
 
-  return isUsernameValid
-})
+const hasMinimumLength = computed(() => user.password.length >= 8)
 
-const checkIsValidPassword = computed(() => {
-  let isValidPassword = false
+const hasNumber = computed(() => /\d/.test(user.password))
 
-  if (
-    hasMinimumLength.value === true &&
-    hasNumber.value === true &&
-    hasUppercase.value === true &&
-    hasLowercase.value === true &&
-    hasSpecial.value === true
-  ) {
-    isValidPassword = true
-  }
+const hasUppercase = computed(() => /[A-Z]/.test(user.password))
 
-  return isValidPassword
-})
+const hasLowercase = computed(() => /[a-z]/.test(user.password))
 
-const hasMinimumLength = computed(() => {
-  let checkMinimumLength = false
-  if (user.password.length >= 8) {
-    checkMinimumLength = true
-  } else {
-    checkMinimumLength = false
-  }
-
-  return checkMinimumLength
-})
-
-const hasNumber = computed(() => {
-  let checkNumber = false
-
-  checkNumber = /\d/.test(user.password)
-
-  return checkNumber
-})
-
-const hasUppercase = computed(() => {
-  let checkUppercase = false
-
-  checkUppercase = /[A-Z]/.test(user.password)
-
-  return checkUppercase
-})
-
-const hasLowercase = computed(() => {
-  let checkLowerCase = false
-
-  checkLowerCase = /[a-z]/.test(user.password)
-
-  return checkLowerCase
-})
-
-const hasSpecial = computed(() => {
-  const format = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/
-  let checkSpecial = false
-
-  checkSpecial = format.test(user.password)
-
-  return checkSpecial
-})
+const hasSpecial = computed(() =>
+  /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(user.password)
+)
 
 const isDisabled = computed(
   () =>
     user.username !== '' &&
     user.password !== '' &&
-    checkIsValidUsername.value === true &&
-    checkIsValidPassword.value === true
+    checkIsValidUsername &&
+    checkIsValidPassword
 )
 
 const onSubmit = () => {

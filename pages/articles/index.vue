@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title :text="'Articles'" />
+    <Title text="Articles" />
     <ErrorMessage :error="error" />
     <div class="sm:flex">
       <Pagination
