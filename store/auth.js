@@ -14,4 +14,7 @@ export const mutations = {
     document.cookie = 'user=; Max-Age=0'
     this.app.router.push('/login')
   },
+  authentication(state, username) {
+    state.username = username
+  }
 }

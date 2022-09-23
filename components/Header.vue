@@ -17,7 +17,6 @@
             >Space News</span
           >
         </a>
-        <!-- TODO: persist state -->
         <div
           v-if="$store.state.auth.username"
           class="flex items-center lg:order-2"
@@ -43,7 +42,12 @@ import rocketArrow from '@/src/assets/icons/rocket.svg'
 
 const { $store } = useNuxtApp()
 
+onMounted(() => {
+  $store.commit('auth/authentication', sessionStorage.getItem('loggedUser'))
+})
+
 const logout = () => {
+  sessionStorage.removeItem('loggedUser')
   $store.commit('auth/logout')
 }
 </script>
