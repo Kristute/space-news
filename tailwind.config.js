@@ -7,7 +7,11 @@ module.exports = {
     './nuxt.config.js',
   ],
   theme: {
-    extend: {}
-    },
+    extend: {
+      inset: {
+        '-4': '-1rem',
+      }
+    }
+  },
   plugins: [],
 }

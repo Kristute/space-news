@@ -9,10 +9,10 @@
       class="bg-white m-0 sm:p-2 flex items-center box-border overflow-hidden break-words content-center rounded-md text-xs sm:text-base"
     >
       <PaginationItem
-        :aria-label="'go to previous page'"
+        aria-label="go to previous page"
         :is-disabled="currentPage === 1"
         :src="arrowIcon"
-        :img-class="'transform rotate-180'"
+        img-class="transform rotate-180"
         @click="previous()"
       />
       <PaginationItem
@@ -26,7 +26,7 @@
         @click="setQueryParams(page)"
       />
       <PaginationItem
-        :aria-label="'go to next page'"
+        aria-label="go to next page"
         :is-disabled="currentPage === numberOfPages || !numberOfPages"
         :src="arrowIcon"
         @click="next()"
