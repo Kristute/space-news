@@ -17,31 +17,16 @@
             >Space News</span
           >
         </a>
-        <div
-          v-if="$store.state.auth.username"
-          class="flex items-center lg:order-2"
-        >
-          <div
-            class="text-pink-900 text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 w-20 sm:w-40 lg:w-full overflow-hidden text-ellipsis"
-          >
-            {{ $store.state.auth.username }}
-          </div>
-          <button
-            class="text-pink-100 rounded py-2 px-4 font-bold bg-pink-900 hover:text-pink-400 border-none cursor-pointer"
-            @click="logout"
-          >
-            Logout
-          </button>
-        </div>
+        <!-- TODO: logout button when Auth middleware will be implemented  -->
+        <!-- <div class="flex items-center lg:order-2">
+            <a href="/login" class="text-pink-900 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                Logout
+            </a>
+        </div> -->
       </div>
     </nav>
   </header>
 </template>
 <script lang="ts" setup>
 import rocketArrow from '@/src/assets/icons/rocket.svg'
-
-const { $store } = useNuxtApp()
-const logout = () => {
-  $store.commit('auth/logout')
-}
 </script>

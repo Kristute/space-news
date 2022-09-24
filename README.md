@@ -2,7 +2,7 @@
 
 ## TODO
 
-- [x] add Auth middleware
+- [ ] add Auth middleware
 - [x] validate login form password and username length (can add password complexity)
 - [x] add layouts for pages
 - [x] move 404 page to error layouts

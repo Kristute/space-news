@@ -9,20 +9,3 @@
     </main>
   </div>
 </template>
-<script lang="ts" setup>
-const { $store } = useNuxtApp()
-const route = useRoute()
-const pageParams = computed(() => route.path)
-
-watch(pageParams, () => {
-  localStorage.setItem('path', JSON.stringify(route.path))
-})
-
-onMounted(() => {
-  const token = localStorage.getItem('token')
-
-  if (token) {
-    $store.commit('auth/authenticate', JSON.parse(token))
-  }
-})
-</script>

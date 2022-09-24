@@ -78,9 +78,6 @@
 import { reactive, computed } from 'vue'
 import { User } from '../types/User'
 
-const { $store } = useNuxtApp()
-const router = useRouter()
-
 const user = reactive<User>({
   username: '',
   password: '',
@@ -119,11 +116,8 @@ const isDisabled = computed(
     checkIsValidPassword
 )
 
+const router = useRouter()
 const onSubmit = () => {
-  $store.commit('auth/login', {
-    username: user.username,
-    password: user.password,
-  })
   router.push({ name: 'articles' })
 }
 </script>
