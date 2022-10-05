@@ -127,7 +127,6 @@ const onSubmit = () => {
     password: user.password,
   })
   userCookie.value = `${user.username}:${user.password}`
-  sessionStorage.setItem('loggedUser', user.username)
 
   router.push({ path: '/articles' })
 }

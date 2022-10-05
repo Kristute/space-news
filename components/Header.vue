@@ -38,16 +38,19 @@
   </header>
 </template>
 <script lang="ts" setup>
+import { getUserCookie } from '../src/getUserCookie'
 import rocketArrow from '@/src/assets/icons/rocket.svg'
 
 const { $store } = useNuxtApp()
 
 onMounted(() => {
-  $store.commit('auth/authentication', sessionStorage.getItem('loggedUser'))
+  const { credentials } = getUserCookie()
+  if (credentials) {
+    $store.commit('auth/authentication', credentials[0])
+  }
 })
 
 const logout = () => {
-  sessionStorage.removeItem('loggedUser')
   $store.commit('auth/logout')
 }
 </script>
