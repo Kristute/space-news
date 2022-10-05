@@ -1,7 +1,7 @@
 <template>
   <div v-if="article">
     <div class="flex text-sm md:text-base text-pink-700 py-5 mx-auto">
-      <a href="/articles">Articles / </a>
+      <NuxtLink to="/articles">Articles / </NuxtLink>
       <p class="text-pink-900 font-bold">Article #{{ id }}</p>
     </div>
     <Title :text="article.title" />
@@ -54,4 +54,7 @@ onMounted(() => {
       article.value = a
     })
 })
+</script>
+<script lang="ts">
+export default { name: 'ArticleID' }
 </script>
