@@ -6,7 +6,7 @@ export default defineNuxtConfig ({
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'space-news',
+    title: 'Space News',
     htmlAttrs: {
       lang: 'en',
     },
