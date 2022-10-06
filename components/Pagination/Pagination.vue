@@ -41,6 +41,7 @@ import arrowIcon from '../../src/assets/icons/arrow.svg'
 interface PaginationProps {
   itemsTotal: number
   itemsPerPage: number
+  pageName: string
 }
 const props = defineProps<PaginationProps>()
 const route = useRoute()
@@ -91,7 +92,7 @@ const pages = computed(() => {
 
 const setQueryParams = (page) => {
   router.push({
-    path: '/articles',
+    path: `/${props.pageName}`,
     query: { page: page.toString(), amount: props.itemsPerPage.toString() },
   })
 }

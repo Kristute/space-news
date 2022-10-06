@@ -1,28 +1,43 @@
 <template>
   <div>
-    <Title text="Articles" />
+    <Title text="Reports" />
     <ErrorMessage :error="error" />
     <div class="sm:flex">
       <Pagination
         v-if="totalArticlesCount !== 0"
         :items-total="totalArticlesCount"
         :items-per-page="currentAmount"
-        page-name="articles"
+        page-name="reports"
       />
       <PerPageSelect
         :options="amount"
         :current-amount="currentAmount"
-        page-name="articles"
+        page-name="reports"
       />
     </div>
     <div v-if="loadArticles.length === 0">Loading ...</div>
     <div v-else>
-      <SpaceArticle :articles="articles" />
+      <div class="my-4">
+        <img
+          :src="`${articles[0]?.imageUrl}`"
+          :alt="`${articles[0]?.title}`"
+          class="w-full h-60 object-cover"
+        />
+      </div>
+      <SpaceReport :articles="articles" />
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { useArticlesApi } from '../../src/useArticlesApi'
+import { Article } from 'types/Article'
+
+interface ArticlesProps {
+  articles: Article[]
+}
+
+defineProps<ArticlesProps>()
+
 const route = useRoute()
 
 const pageParams = computed(() => ({
@@ -47,7 +62,7 @@ const amount = [
 ]
 
 const { articles, loadArticles, totalArticlesCount, error } =
-  useArticlesApi('articles')
+  useArticlesApi('reports')
 
 loadArticles(currentAmount, 1)
 </script>
