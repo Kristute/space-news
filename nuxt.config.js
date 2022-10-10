@@ -34,7 +34,6 @@ export default defineNuxtConfig ({
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     'nuxt-purgecss',
-    '@nuxtjs/svg'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -52,6 +51,9 @@ export default defineNuxtConfig ({
     },
   },
   router: {
-    middleware: [ 'auth' ]
+    middleware: [ 
+      'auth', 
+      'redirect' 
+    ]
   }
 })
