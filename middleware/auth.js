@@ -1,14 +1,15 @@
-import { parseCookies } from 'h3'
-import { getUserCookie } from '../src/getUserCookie'
+import { parseCookies } from '../src/parseCookies'
 
 export default function ({ req, route, redirect }) {
   let isAuthenticated = false
 
   if (req) {
-    isAuthenticated = !!parseCookies(req)?.user?.split(':')
+    if (req?.headers?.cookie) {
+      isAuthenticated = parseCookies(req?.headers?.cookie).cookie.name === 'user'
+    }
+    
   } else if (document.cookie) {
-      const { credentials } = getUserCookie()
-      isAuthenticated = !!credentials
+      isAuthenticated = parseCookies(document.cookie).cookie.name === 'user'
   }
 
   if (!isAuthenticated && route.path !== '/login') {
