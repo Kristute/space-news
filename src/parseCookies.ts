@@ -3,7 +3,7 @@ interface cookiesProps {
     value: string
 }
 
-export function parseCookies(cookies) {
+export function parseCookies(cookies: string) {
     let cookie = <cookiesProps>{}
 
     cookies.split(';').map((cookies) => {

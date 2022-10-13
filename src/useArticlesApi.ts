@@ -6,7 +6,7 @@ interface ArticlesProps {
   articles: Article[]
 }
 
-export function useArticlesApi(page) {
+export function useArticlesApi(page: string) {
   const articles: Ref<ArticlesProps[]> = ref([]);
   const totalArticlesCount: Ref<number> = ref(0);
   let error: any;

@@ -1,6 +1,6 @@
 import { useArticlesApi } from './useArticlesApi'
 
-export function loadPageParams(data) {
+export function loadPageParams(data: string) {
   const route = useRoute()
 
   const pageParams = computed(() => ({
