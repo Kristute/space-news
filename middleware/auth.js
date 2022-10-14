@@ -5,11 +5,12 @@ export default function ({ req, route, redirect }) {
 
   if (req) {
     if (req?.headers?.cookie) {
-      isAuthenticated = parseCookies(req?.headers?.cookie).cookie.name === 'user'
+      isAuthenticated = Object.keys(parseCookies(req?.headers?.cookie))[0] === 'user'
     }
     
   } else if (document.cookie) {
-      isAuthenticated = parseCookies(document.cookie).cookie.name === 'user'
+    parseCookies(document.cookie)
+      isAuthenticated = Object.keys(parseCookies(document.cookie))[0] === 'user'
   }
 
   if (!isAuthenticated && route.path !== '/login') {
