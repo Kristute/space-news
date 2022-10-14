@@ -59,8 +59,8 @@ onMounted(() => {
   if (document.cookie) {
     const loggedIn = parseCookies(document.cookie)
 
-    const credentials = decodeURIComponent(loggedIn.cookie.value).split(':')
-    $store.commit('auth/authentication', credentials[0])
+    const credentials = decodeURIComponent(loggedIn.user).split(':')[0]
+    $store.commit('auth/authentication', credentials)
   }
 })
 
