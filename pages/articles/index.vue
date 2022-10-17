@@ -26,7 +26,7 @@ const pageParams = computed(() => ({
 }))
 
 watch(pageParams, () => {
-  loadArticles(currentAmount, route.query.page)
+  loadArticles(currentAmount, route.query.page || 1)
 })
 
 const currentAmount = computed(() => {

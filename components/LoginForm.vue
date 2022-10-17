@@ -64,7 +64,6 @@
           </svg>
         </div>
       </div>
-
       <PrimaryButton
         :disabled="!isDisabled"
         type="submit"
@@ -76,7 +75,13 @@
 </template>
 <script setup lang="ts">
 import { reactive, computed } from 'vue'
+import { useCookie } from '@nuxt/bridge/dist/runtime'
 import { User } from '../types/User'
+
+const { $store } = useNuxtApp()
+const router = useRouter()
+
+const userCookie = useCookie('user')
 
 const user = reactive<User>({
   username: '',
@@ -112,13 +117,18 @@ const isDisabled = computed(
   () =>
     user.username !== '' &&
     user.password !== '' &&
-    checkIsValidUsername &&
-    checkIsValidPassword
+    checkIsValidUsername.value &&
+    checkIsValidPassword.value
 )
 
-const router = useRouter()
 const onSubmit = () => {
-  router.push({ name: 'articles' })
+  $store.commit('auth/login', {
+    username: user.username,
+    password: user.password,
+  })
+  userCookie.value = `${user.username}:${user.password}`
+
+  router.push({ path: '/articles' })
 }
 </script>
 <style scoped>
