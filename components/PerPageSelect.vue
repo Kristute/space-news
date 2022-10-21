@@ -21,7 +21,6 @@ const router = useRouter()
 interface PerPageProps {
   options: Array<any>
   currentAmount: number
-  pageName: string
 }
 const props = defineProps<PerPageProps>()
 const emit = defineEmits(['change-current-amount'])
@@ -33,7 +32,7 @@ const changeCurrentAmount = (event) => {
 
 const loadAmount = (value) => {
   router.push({
-    path: `/${props.pageName}`,
+    path: `/${route.name}`,
     query: { ...route.query, amount: value },
   })
 }

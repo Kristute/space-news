@@ -9,7 +9,6 @@
 - [x] migrate to tailwind
 - [x] add pagination to articles list
 - [x] add list length select to articles list
-- [ ] use ssg (generated) build
 - [x] add reports page
 
 ## Build Setup

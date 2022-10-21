@@ -7,13 +7,8 @@
         v-if="totalArticlesCount !== 0"
         :items-total="totalArticlesCount"
         :items-per-page="currentAmount"
-        page-name="reports"
       />
-      <PerPageSelect
-        :options="amount"
-        :current-amount="currentAmount"
-        page-name="reports"
-      />
+      <PerPageSelect :options="amount" :current-amount="currentAmount" />
     </div>
     <div v-if="loadArticles.length === 0">Loading ...</div>
     <div v-else>

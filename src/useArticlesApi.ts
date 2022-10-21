@@ -12,7 +12,7 @@ export function useArticlesApi(page: string) {
   let error: any;
 
   onMounted(async () => await loadArticlesCount())
-  
+
   const loadArticles = async (articlesLimit, startMarker) => {
     try {
       articles.value = await get(`${page}?_limit=${articlesLimit.value}&_start=${startMarker}`);
@@ -28,7 +28,7 @@ export function useArticlesApi(page: string) {
       error = err
     }
   };
-  
+
   return {
     articles,
     loadArticles,

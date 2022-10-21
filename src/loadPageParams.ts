@@ -27,8 +27,8 @@ export function loadPageParams(data: string) {
   const { articles, loadArticles, totalArticlesCount, error } =
     useArticlesApi(data)
   
-  loadArticles(currentAmount, 1)
-    
+  onMounted(async () => await loadArticles(currentAmount, 1))
+  
     return {
       articles,
       loadArticles,

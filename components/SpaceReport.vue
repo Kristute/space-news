@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap -mx-4">
     <div
-      v-for="article in props.articles"
+      v-for="article in articles"
       :key="article.id"
       class="w-full sm:w-1/2 p-4"
     >
@@ -40,5 +40,5 @@ interface ReportsProps {
   articles: Article[]
 }
 
-const props = defineProps<ReportsProps>()
+defineProps<ReportsProps>()
 </script>

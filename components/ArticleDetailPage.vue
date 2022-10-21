@@ -48,31 +48,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
-import { Article } from '../types/Article'
+import { useDetailsApi } from '../src/useDetailsApi'
 interface ArticleDetailProps {
   articleType: string
 }
 const props = defineProps<ArticleDetailProps>()
-
-const article = ref<Article>()
 const route = useRoute()
 const id = computed(() => route.params.id)
-const error: Ref<any> = ref()
 
-onMounted(() => {
-  fetch(
-    'https://api.spaceflightnewsapi.net/v3/' +
-      props.articleType +
-      's/' +
-      id.value
-  )
-    .then((res) => res.json())
-    .then((a) => {
-      article.value = a
-    })
-    .catch((err) => {
-      error.value = err
-    })
-})
+const { article, error } = useDetailsApi(props.articleType, id.value)
 </script>
