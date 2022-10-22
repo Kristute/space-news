@@ -3,7 +3,7 @@ import { get } from './utils/client'
 
 export function useArticlesCountApi(page: string) {
   const totalArticlesCount: Ref<number> = ref(0);
-  let errorCount: any;
+  const errorCount: Ref<any> = ref()
   const isLoadingCount = ref(false) // should be true
 
   onMounted(async () => await loadArticlesCount())
@@ -13,7 +13,7 @@ export function useArticlesCountApi(page: string) {
     try {
       totalArticlesCount.value = await get(`${page}/count`);
     } catch (err) {
-        errorCount = err
+        errorCount.value = err
     }
     isLoadingCount.value = false
   };

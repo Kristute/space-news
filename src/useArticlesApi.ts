@@ -8,7 +8,7 @@ interface ArticlesProps {
 
 export function useArticlesApi(page: string) {
   const articles: Ref<ArticlesProps[]> = ref([]);
-  let errorArticles: any;
+  const errorArticles: Ref<any> = ref()
   const isLoadingArticles = ref(false)
 
   const loadArticles = async (articlesLimit, startMarker) => {
@@ -16,7 +16,7 @@ export function useArticlesApi(page: string) {
     try {
       articles.value = await get(`${page}?_limit=${articlesLimit.value}&_start=${startMarker}`);
     } catch (err) {
-      errorArticles = err
+      errorArticles.value = err
     }
     isLoadingArticles.value = false
   }
