@@ -19,6 +19,8 @@
 <script setup lang="ts">
 import { loadPageParams } from '../../src/loadPageParams'
 
+const route = useRoute()
+
 const {
   articles,
   totalArticlesCount,
@@ -26,5 +28,5 @@ const {
   isLoading,
   currentAmount,
   amount,
-} = loadPageParams('articles')
+} = loadPageParams(`${route.name}`)
 </script>

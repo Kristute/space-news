@@ -27,6 +27,8 @@
 import { loadPageParams } from '../../src/loadPageParams'
 import { Article } from 'types/Article'
 
+const route = useRoute()
+
 interface ReportsProps {
   articles?: Article[]
 }
@@ -40,5 +42,5 @@ const {
   isLoading,
   currentAmount,
   amount,
-} = loadPageParams('reports')
+} = loadPageParams(`${route.name}`)
 </script>
