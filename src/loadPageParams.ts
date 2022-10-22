@@ -1,4 +1,3 @@
-import { Ref } from 'vue';
 import { useArticlesApi } from './useArticlesApi'
 import { useArticlesCountApi } from './useArticlesCountApi'
 
@@ -39,12 +38,15 @@ export function loadPageParams(data: string) {
       return false
     })
 
-    const error: Ref<any> = ref()
-    if (errorArticles) {
-      error.value = errorArticles
-    } else if (errorCount) {
-      error.value = errorCount
-    }
+    const error = computed(() => {
+      if (errorArticles.value) {
+
+        return errorArticles.value
+      } else if (errorCount.value) {
+
+        return errorCount.value
+      }
+    })
   
   onMounted(async () => await loadArticles(currentAmount, 1))
   
