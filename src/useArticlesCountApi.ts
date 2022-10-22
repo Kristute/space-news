@@ -4,7 +4,7 @@ import { get } from './utils/client'
 export function useArticlesCountApi(page: string) {
   const totalArticlesCount: Ref<number> = ref(0);
   const errorCount: Ref<any> = ref()
-  const isLoadingCount = ref(false) // should be true
+  const isLoadingCount = ref(true)
 
   onMounted(async () => await loadArticlesCount())
 

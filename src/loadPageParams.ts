@@ -32,10 +32,12 @@ export function loadPageParams(data: string) {
   const { totalArticlesCount, errorCount, isLoadingCount } =
     useArticlesCountApi(data)
 
-    const isLoading = ref(false)
-    if (isLoadingArticles.value || isLoadingCount.value) {
-      isLoading.value = true
-    }
+    const isLoading = computed(() => {
+      if (isLoadingArticles.value || isLoadingCount.value) {
+        return true
+      }
+      return false
+    })
 
     const error: Ref<any> = ref()
     if (errorArticles) {
