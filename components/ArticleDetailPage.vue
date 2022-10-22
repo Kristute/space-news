@@ -1,6 +1,7 @@
 <template>
   <div>
     <ErrorMessage :error="error" />
+    <div v-if="isLoading">Loading...</div>
     <div v-if="article">
       <div class="flex text-sm md:text-base text-pink-700 py-5 mx-auto">
         <NuxtLink :to="`/${articleType}s`" class="capitalize"
@@ -56,5 +57,5 @@ const props = defineProps<ArticleDetailProps>()
 const route = useRoute()
 const id = computed(() => route.params.id)
 
-const { article, error } = useDetailsApi(props.articleType, id.value)
+const { article, error, isLoading } = useDetailsApi(props.articleType, id.value)
 </script>

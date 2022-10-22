@@ -1,4 +1,5 @@
 import { useArticlesApi } from './useArticlesApi'
+import { useArticlesCountApi } from './useArticlesCountApi'
 
 export function loadPageParams(data: string) {
   const route = useRoute()
@@ -24,8 +25,23 @@ export function loadPageParams(data: string) {
     { value: 200, label: '200' },
   ]
   
-  const { articles, loadArticles, totalArticlesCount, error } =
+  const { articles, loadArticles, errorArticles, isLoadingArticles } =
     useArticlesApi(data)
+
+  const { totalArticlesCount, errorCount, isLoadingCount } =
+    useArticlesCountApi(data)
+
+    let isLoading = false
+    if (isLoadingArticles.value || isLoadingCount.value) {
+      isLoading = true
+    }
+
+    let error: any
+    if (errorArticles) {
+      error = errorArticles
+    } else if (errorCount) {
+      error = errorCount
+    }
   
   onMounted(async () => await loadArticles(currentAmount, 1))
   
@@ -34,6 +50,7 @@ export function loadPageParams(data: string) {
       loadArticles,
       totalArticlesCount,
       error,
+      isLoading,
       currentAmount,
       amount
     };

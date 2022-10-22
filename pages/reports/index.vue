@@ -10,7 +10,7 @@
       />
       <PerPageSelect :options="amount" :current-amount="currentAmount" />
     </div>
-    <div v-if="loadArticles.length === 0">Loading ...</div>
+    <div v-if="isLoading">Loading...</div>
     <div v-else>
       <div class="my-4">
         <img
@@ -35,9 +35,9 @@ defineProps<ReportsProps>()
 
 const {
   articles,
-  loadArticles,
   totalArticlesCount,
   error,
+  isLoading,
   currentAmount,
   amount,
 } = loadPageParams('reports')
