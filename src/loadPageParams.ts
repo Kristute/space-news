@@ -31,22 +31,17 @@ export function loadPageParams(data: string) {
   const { totalArticlesCount, errorCount, isLoadingCount } =
     useArticlesCountApi(data)
 
-    const isLoading = computed(() => {
-      if (isLoadingArticles.value || isLoadingCount.value) {
-        return true
-      }
-      return false
-    })
+  const isLoading = computed(() => isLoadingArticles.value || isLoadingCount.value)
 
-    const error = computed(() => {
-      if (errorArticles.value) {
+  const error = computed(() => {
+    if (errorArticles.value) {
 
-        return errorArticles.value
-      } else if (errorCount.value) {
+      return errorArticles.value
+    } else if (errorCount.value) {
 
-        return errorCount.value
-      }
-    })
+      return errorCount.value
+    }
+  })
   
   onMounted(async () => await loadArticles(currentAmount, 1))
   
