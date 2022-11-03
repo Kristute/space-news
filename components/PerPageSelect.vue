@@ -32,7 +32,7 @@ const changeCurrentAmount = (event) => {
 
 const loadAmount = (value) => {
   router.push({
-    path: '/articles',
+    path: `/${route.name}`,
     query: { ...route.query, amount: value },
   })
 }

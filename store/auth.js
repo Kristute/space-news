@@ -1,3 +1,5 @@
+import { useCookie } from '@nuxt/bridge/dist/runtime'
+
 export const state = () => ({
   username: '',
   password: ''
@@ -5,8 +7,12 @@ export const state = () => ({
 
 export const mutations = {
   login(state, {username, password}) {
+    const userCookie = useCookie('user')
+    const router = useRouter()
     state.username = username
     state.password = password
+    userCookie.value = `${username}:${password}`
+    router.push({ path: '/articles' })
   },
   logout(state) {   
     state.username = null   

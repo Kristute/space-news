@@ -1,4 +1,4 @@
-import { ref, Ref, onMounted } from 'vue';
+import { ref, Ref } from 'vue';
 import { Article } from '../types/Article'
 import { get } from './utils/client'
 
@@ -6,33 +6,25 @@ interface ArticlesProps {
   articles: Article[]
 }
 
-export function useArticlesApi() {
+export function useArticlesApi(page: string) {
   const articles: Ref<ArticlesProps[]> = ref([]);
-  const totalArticlesCount: Ref<number> = ref(0);
-  let error: any;
+  const errorArticles: Ref<any> = ref()
+  const isLoadingArticles = ref(false)
 
-  onMounted(async () => await loadArticlesCount())
-  
   const loadArticles = async (articlesLimit, startMarker) => {
+    isLoadingArticles.value = true
     try {
-      articles.value = await get(`articles?_limit=${articlesLimit.value}&_start=${startMarker}`);
+      articles.value = await get(`${page}?_limit=${articlesLimit.value}&_start=${startMarker}`);
     } catch (err) {
-      error = err
+      errorArticles.value = err
     }
+    isLoadingArticles.value = false
   }
 
-  const loadArticlesCount = async () => {
-    try {
-      totalArticlesCount.value = await get('articles/count');
-    } catch (err) {
-      error = err
-    }
-  };
-  
   return {
     articles,
     loadArticles,
-    totalArticlesCount,
-    error
+    errorArticles,
+    isLoadingArticles
   };
 }

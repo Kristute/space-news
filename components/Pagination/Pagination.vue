@@ -91,7 +91,7 @@ const pages = computed(() => {
 
 const setQueryParams = (page) => {
   router.push({
-    path: '/articles',
+    path: `/${route.name}`,
     query: { page: page.toString(), amount: props.itemsPerPage.toString() },
   })
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title text="Articles" />
+    <Title text="Reports" />
     <ErrorMessage :error="error" />
     <div class="sm:flex">
       <Pagination
@@ -12,14 +12,28 @@
     </div>
     <div v-if="isLoading">Loading...</div>
     <div v-else>
-      <SpaceArticle :articles="articles" />
+      <div class="my-4">
+        <img
+          :src="`${articles[0]?.imageUrl}`"
+          :alt="`${articles[0]?.title}`"
+          class="w-full h-60 object-cover"
+        />
+      </div>
+      <SpaceReport :articles="articles" />
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { loadPageParams } from '../../src/loadPageParams'
+import { Article } from 'types/Article'
 
 const route = useRoute()
+
+interface ReportsProps {
+  articles?: Article[]
+}
+
+defineProps<ReportsProps>()
 
 const {
   articles,

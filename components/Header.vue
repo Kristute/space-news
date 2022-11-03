@@ -17,6 +17,21 @@
             >Space News</span
           >
         </NuxtLink>
+        <div v-if="username" class="flex">
+          <NuxtLink to="/articles" class="pr-2">
+            <span
+              class="self-center text-xl font-semibold whitespace-nowrap text-pink-900"
+              >Articles</span
+            >
+          </NuxtLink>
+          /
+          <NuxtLink to="/reports" class="px-2">
+            <span
+              class="self-center text-xl font-semibold whitespace-nowrap text-pink-900"
+              >Reports</span
+            >
+          </NuxtLink>
+        </div>
         <div v-if="username" class="flex items-center lg:order-2">
           <div
             class="text-pink-900 text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 w-20 sm:w-40 lg:w-full overflow-hidden text-ellipsis"
