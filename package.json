@@ -1,5 +1,6 @@
 {
   "name": "space-news",
+  "homepage": "https://kristute.github.io/space-news/",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,6 +8,7 @@
     "build": "nuxi build",
     "start": "nuxi preview",
     "generate": "nuxt generate",
+    "deploy": "gh-pages -d build",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
     "lint": "eslint --ext .ts,.js,.vue .",
@@ -14,6 +16,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
+    "gh-pages": "^5.0.0",
     "nuxt-edge": "latest",
     "nuxt-purgecss": "^1.0.0",
     "sass": "^1.52.3"
