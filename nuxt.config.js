@@ -60,7 +60,4 @@ export default defineNuxtConfig ({
       'redirect' 
     ]
   },
-  generate: {
-    dir: 'docs', // Set the output directory to 'docs' so that GitHub Pages can serve the files from there
-  },
 })
