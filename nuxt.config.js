@@ -1,6 +1,10 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
 
 export default defineNuxtConfig ({
+  target: 'static',
+  router: {
+    base: '/space-news/',
+  },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: true,
 
@@ -55,5 +59,8 @@ export default defineNuxtConfig ({
       'auth', 
       'redirect' 
     ]
-  }
+  },
+  generate: {
+    dir: 'docs', // Set the output directory to 'docs' so that GitHub Pages can serve the files from there
+  },
 })

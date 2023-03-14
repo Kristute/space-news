@@ -9,7 +9,7 @@
     "start": "nuxi preview",
     "generate": "nuxt generate",
     "predeploy" : "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "nuxt generate && gh-pages -d dist",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
     "lint": "eslint --ext .ts,.js,.vue .",
