@@ -15,6 +15,8 @@
   </select>
 </template>
 <script lang="ts" setup>
+import { useRoute, useRouter } from '@nuxt/bridge/dist/runtime'
+
 const route = useRoute()
 const router = useRouter()
 

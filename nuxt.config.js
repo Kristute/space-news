@@ -1,10 +1,7 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
 
-export default defineNuxtConfig ({
+export default defineNuxtConfig({
   target: 'static',
-  router: {
-    base: '/space-news/',
-  },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: true,
 
@@ -24,9 +21,7 @@ export default defineNuxtConfig ({
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '@/src/assets/css/main.css'
-  ],
+  css: ['@/src/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -41,9 +36,7 @@ export default defineNuxtConfig ({
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@nuxtjs/axios',
-  ],
+  modules: ['@nuxtjs/axios'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -55,9 +48,7 @@ export default defineNuxtConfig ({
     },
   },
   router: {
-    middleware: [ 
-      'auth', 
-      'redirect' 
-    ]
+    middleware: ['auth', 'redirect'],
+    base: '/space-news/',
   },
 })
