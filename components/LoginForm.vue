@@ -74,6 +74,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useNuxtApp } from '@nuxt/bridge/dist/runtime'
 import { reactive, computed } from 'vue'
 import { User } from '../types/User'
 
