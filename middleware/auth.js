@@ -7,10 +7,9 @@ export default function ({ req, route, redirect }) {
     if (req?.headers?.cookie) {
       isAuthenticated = parseCookies(req?.headers?.cookie).user
     }
-    
   } else if (document.cookie) {
     parseCookies(document.cookie)
-      isAuthenticated = parseCookies(document.cookie).user
+    isAuthenticated = parseCookies(document.cookie).user
   }
 
   if (!isAuthenticated && route.path !== '/login') {

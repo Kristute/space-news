@@ -49,6 +49,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useRoute } from '@nuxt/bridge/dist/runtime'
+import { computed } from 'vue'
 import { useDetailsApi } from '../src/useDetailsApi'
 interface ArticleDetailProps {
   articleType: string

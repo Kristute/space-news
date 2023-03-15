@@ -50,6 +50,7 @@
   </header>
 </template>
 <script lang="ts" setup>
+import { computed, onMounted, useNuxtApp } from '@nuxt/bridge/dist/runtime'
 import { parseCookies } from '../src/parseCookies'
 import rocketArrow from '@/src/assets/icons/rocket.svg'
 
